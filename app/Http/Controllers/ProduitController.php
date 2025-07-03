@@ -33,6 +33,7 @@ class ProduitController extends Controller
             'nom' => 'required|string|max:255',
             'prix' => 'required|numeric|min:0',
             'quantite' => 'required|integer|min:0',
+            'seuil_alerte' => 'required|integer|min:0',
         ]);
 
         Produit::create($request->all());
