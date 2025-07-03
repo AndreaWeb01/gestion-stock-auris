@@ -12,7 +12,8 @@ class ProduitController extends Controller
      */
     public function index()
     {
-        //
+        $produits = Produit::all();
+        return view('produits.index', compact('produits'));
     }
 
     /**
@@ -20,7 +21,7 @@ class ProduitController extends Controller
      */
     public function create()
     {
-        //
+        return view('produits.create');
     }
 
     /**
@@ -28,7 +29,15 @@ class ProduitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'prix' => 'required|numeric|min:0',
+            'quantite' => 'required|integer|min:0',
+        ]);
+
+        Produit::create($request->all());
+
+        return redirect()->route('produits.index')->with('success', 'Produit créé avec succès.');
     }
 
     /**
@@ -36,7 +45,7 @@ class ProduitController extends Controller
      */
     public function show(Produit $produit)
     {
-        //
+        return view('produits.show', compact('produit'));
     }
 
     /**
@@ -44,7 +53,7 @@ class ProduitController extends Controller
      */
     public function edit(Produit $produit)
     {
-        //
+        return view('produits.edit', compact('produit'));
     }
 
     /**
@@ -52,7 +61,15 @@ class ProduitController extends Controller
      */
     public function update(Request $request, Produit $produit)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'prix' => 'required|numeric|min:0',
+            'quantite' => 'required|integer|min:0',
+        ]);
+
+        $produit->update($request->all());
+
+        return redirect()->route('produits.index')->with('success', 'Produit mis à jour avec succès.');
     }
 
     /**
@@ -60,6 +77,8 @@ class ProduitController extends Controller
      */
     public function destroy(Produit $produit)
     {
-        //
+        $produit->delete();
+
+        return redirect()->route('produits.index')->with('success', 'Produit supprimé avec succès.');
     }
 }
