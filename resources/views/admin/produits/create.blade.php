@@ -2,102 +2,76 @@
 
 @section('content')
 
-   <div class="container-fluid">
+<div class="container-fluid">
 
-                        <!-- start page title -->
-                        <div class="py-3 py-lg-4">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <h4 class="page-title mb-0">Form Validation</h4>
-                                </div>
-                                <div class="col-lg-6">
-                                   <div class="d-none d-lg-block">
-                                    <ol class="breadcrumb m-0 float-end">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                                        <li class="breadcrumb-item active">Form Validation</li>
-                                    </ol>
-                                   </div>
-                                </div>
+    <!-- start page title -->
+    <div class="py-3 py-lg-4">
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="page-title mb-0">Créer un produit</h4>
+            </div>
+            <div class="col-lg-6">
+                <div class="d-none d-lg-block">
+                    <ol class="breadcrumb m-0 float-end">
+                        <li class="breadcrumb-item"><a href="{{ route('produits.index') }}">Produits</a></li>
+                        <li class="breadcrumb-item active">Créer</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Nouveau Produit</h4>
+                    <p class="sub-header">Remplissez le formulaire pour ajouter un nouveau produit.</p>
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form class="needs-validation" novalidate method="POST" action="{{ route('produits.store') }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom du produit</label>
+                            <input type="text" class="form-control @error('nom') is-invalid @enderror" id="nom" name="nom" value="{{ old('nom') }}" required maxlength="255">
+                            <div class="invalid-feedback">
+                                Veuillez saisir le nom du produit.
                             </div>
                         </div>
-                        <!-- end page title -->
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="header-title">Bootstrap Validation - Normal</h4>
-                                        <p class="sub-header">Provide valuable, actionable feedback to your users with HTML5 form validation–available in all our supported browsers.</p>
-
-                                        <form class="needs-validation" novalidate>
-                                            <div class="mb-3">
-                                                <label for="validationCustom01" class="form-label">First name</label>
-                                                <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
-                                                <div class="valid-feedback">
-                                                    Looks good!
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="validationCustom02" class="form-label">Last name</label>
-                                                <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required>
-                                                <div class="valid-feedback">
-                                                    Looks good!
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="validationCustomUsername" class="form-label">Username</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                    <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend"
-                                                        required>
-                                                    <div class="invalid-feedback">
-                                                        Please choose a username.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="validationCustom03" class="form-label">City</label>
-                                                <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
-                                                <div class="invalid-feedback">
-                                                    Please provide a valid city.
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="validationCustom04" class="form-label">State</label>
-                                                <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
-                                                <div class="invalid-feedback">
-                                                    Please provide a valid state.
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="validationCustom05" class="form-label">Zip</label>
-                                                <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
-                                                <div class="invalid-feedback">
-                                                    Please provide a valid zip.
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                                    <label class="form-check-label" for="invalidCheck">
-                                                        Agree to terms and conditions
-                                                    </label>
-                                                    <div class="invalid-feedback">
-                                                        You must agree before submitting.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button class="btn btn-primary" type="submit">Submit form</button>
-                                        </form>
-
-                                    </div> <!-- end card-body-->
-                                </div> <!-- end card-->
-                            </div> <!-- end col-->
-
+                        <div class="mb-3">
+                            <label for="prix" class="form-label">Prix</label>
+                            <input type="number" step="0.01" min="0" class="form-control @error('prix') is-invalid @enderror" id="prix" name="prix" value="{{ old('prix') }}" required>
+                            <div class="invalid-feedback">
+                                Veuillez saisir un prix valide.
+                            </div>
                         </div>
-                        <!-- end row -->
+                        <div class="mb-3">
+                            <label for="seuil_alerte" class="form-label">Seuil d'alerte</label>
+                            <input type="number" min="0" class="form-control @error('seuil_alerte') is-invalid @enderror" id="seuil_alerte" name="seuil_alerte" value="{{ old('seuil_alerte') }}" required>
+                            <div class="invalid-feedback">
+                                Veuillez saisir un seuil d'alerte valide.
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Créer le produit</button>
+                    </form>
 
-                    </div> <!-- c
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+    </div>
+    <!-- end row -->
+
+</div>
 
     <a href="{{ route('produits.index') }}">Retour à la liste des produits</a>
     @endsection

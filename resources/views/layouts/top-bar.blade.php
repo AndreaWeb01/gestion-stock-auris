@@ -6,14 +6,14 @@
                         <div class="logo-box">
                             <!-- Brand Logo Light -->
                             <a href="index.html" class="logo-light">
-                                <img src="assets/images/logo-light.png" alt="logo" class="logo-lg" height="20">
-                                <img src="assets/images/logo-sm.png" alt="small logo" class="logo-sm" height="20">
+                                <img src="{{url('assets/images/logo-light.png')}}" alt="logo" class="logo-lg" height="20">
+                                <img src="{{url('assets/images/logo-sm.png')}}" alt="small logo" class="logo-sm" height="20">
                             </a>
 
                             <!-- Brand Logo Dark -->
                             <a href="index.html" class="logo-dark">
-                                <img src="assets/images/logo-dark.png" alt="dark logo" class="logo-lg" height="20">
-                                <img src="assets/images/logo-sm.png" alt="small logo" class="logo-sm" height="20">
+                                <img src="{{url('assets/images/logo-dark.png')}}" alt="dark logo" class="logo-lg" height="20">
+                                <img src="{{url('assets/images/logo-sm.png')}}" alt="small logo" class="logo-sm" height="20">
                             </a>
                         </div>
 
@@ -48,28 +48,28 @@
 
                         <li class="dropdown d-none d-md-inline-block">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="assets/images/flags/us.jpg" alt="user-image" class="me-0 me-sm-1" height="18">
+                                <img src="{{url('assets/images/flags/us.jpg')}}" alt="user-image" class="me-0 me-sm-1" height="18">
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated">
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
+                                    <img src="{{url('assets/images/flags/germany.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
+                                    <img src="{{url('assets/images/flags/italy.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
+                                    <img src="{{url('assets/images/flags/spain.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
+                                    <img src="{{url('assets/images/flags/russia.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
                                 </a>
 
                             </div>
@@ -144,7 +144,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <div class="notify-icon">
-                                                        <img src="assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
+                                                        <img src="{{url('assets/images/users/avatar-2.jpg')}}" class="img-fluid rounded-circle" alt="" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1 text-truncate ms-2">
@@ -184,7 +184,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <div class="notify-icon">
-                                                        <img src="assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle" alt="" />
+                                                        <img src="{{url('assets/images/users/avatar-4.jpg')}}" class="img-fluid rounded-circle" alt="" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1 text-truncate ms-2">
@@ -215,7 +215,7 @@
 
                         <li class="dropdown">
                             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-dark" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                                <img src="{{url('assets/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle">
                                 <span class="ms-1 d-none d-md-inline-block">
                                     Henry <i class="mdi mdi-chevron-down"></i>
                                 </span>

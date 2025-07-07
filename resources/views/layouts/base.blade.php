@@ -10,27 +10,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{url('assets/images/favicon.ico')}}">
 
-    <link href="assets/libs/morris.js/morris.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('assets/libs/morris.js/morris.css')}}" rel="stylesheet" type="text/css" />
 
     <!-- App css -->
     <link href="{{url('assets/css/style.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
     <script src="{{url('assets/js/config.js')}}"></script>
+    <link rel="shortcut icon" href="{{url('assets/images/favicon.ico')}} ">
+
+        <!-- third party css -->
+        <link href="{{url('assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{url('assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{url('assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{url('assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- third party css end -->
+
+		<!-- App css -->
+		<link href="{{url('assets/css/style.min.css')}}" rel="stylesheet" type="text/css">
+		<link href="{{url('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
+		<script src="{{url('assets/js/config.js')}}"></script>
+
+
+
 </head>
 
 <body>
 
     <div class="layout-wrapper">
 
-       <div>
-           @include('layouts.sidebar')
-        </div>
+        <div>@include('layouts.sidebar')</div>
+        <div class="page-content">
+
+            <!-- ========== Topbar Start ========== -->
+
+            <!-- ========== Topbar End ========== -->
+
+            <div class="px-3">
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+                     <div>
+                         @include('layouts.top-bar')
+                    </div>
+
+                    <!-- start page title -->
+
 
         @yield('content')
 
-        
+    </div>
+
+
           <!-- Footer Start -->
             <footer class="footer">
                 <div class="container-fluid">
@@ -58,23 +90,45 @@
     <!-- END wrapper -->
 
     <!-- App js -->
-    <script src="assets/js/vendor.min.js"></script>
-    <script src="assets/js/app.js"></script>
+    <script src="{{url('assets/js/vendor.min.js')}}"></script>
+    <script src="{{url('assets/js/app.js')}}"></script>
 
     <!-- Jquery Sparkline Chart  -->
-    <script src="assets/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="{{url('assets/libs/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
 
     <!-- Jquery-knob Chart Js-->
-    <script src="assets/libs/jquery-knob/jquery.knob.min.js"></script>
+    <script src="{{url('assets/libs/jquery-knob/jquery.knob.min.js')}}"></script>
 
 
     <!-- Morris Chart Js-->
-    <script src="assets/libs/morris.js/morris.min.js"></script>
+    <script src="{{url('assets/libs/morris.js/morris.min.js')}}"></script>
 
-    <script src="assets/libs/raphael/raphael.min.js"></script>
+    <script src="{{url('assets/libs/raphael/raphael.min.js')}}"></script>
 
     <!-- Dashboard init-->
-    <script src="assets/js/pages/dashboard.js"></script>
+    <script src="{{url('assets/js/pages/dashboard.js')}}"></script>
+
+    <script src="assets/js/vendor.min.js"></script>
+        <script src="assets/js/app.js"></script>
+
+        <!-- third party js -->
+        <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+        <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+        <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+        <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+        <script src="assets/libs/datatables.net-buttons/js/buttons.flash.min.js"></script>
+        <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+        <script src="assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+        <script src="assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
+        <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
+        <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+        <!-- third party js ends -->
+
+        <!-- Datatables js -->
+        <script src="assets/js/pages/datatables.js"></script>
 
 </body>
 

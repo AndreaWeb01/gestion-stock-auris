@@ -7,17 +7,17 @@ use Illuminate\Http\Request;
 
 class ProduitController extends Controller
 {
-  
+
     public function index()
     {
-        $produits = Produit::paginate(10);
-        return view('produits.index', compact('produits'));
+        $produits = Produit::paginate(20);
+        return view('admin.produits.index', compact('produits'));
     }
 
 
     public function create()
     {
-        return view('produits.create');
+        return view('admin.produits.create');
     }
 
 
@@ -37,12 +37,12 @@ class ProduitController extends Controller
 
     public function show(Produit $produit)
     {
-        return view('produits.show', compact('produit'));
+        return view('admin.produits.show', compact('produit'));
     }
 
     public function edit(Produit $produit)
     {
-        return view('produits.edit', compact('produit'));
+        return view('admin.produits.edit', compact('produit'));
     }
 
 

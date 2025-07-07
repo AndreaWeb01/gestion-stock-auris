@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <title>title</title>
-</head>
-<body>
+@extends('layouts.base')
+@section('title', 'Liste des Clients')
+@section('content')
     <h1>Liste des Clients</h1>
 
     <a href="{{ route('clients.create') }}">Créer un nouveau client</a>
 
-    <table>
+    <table id="datatable-buttons" class="table table-hover table-bordered dt-responsive nowrap w-100">
         <thead>
             <tr>
                 <th>Code Client</th>
@@ -29,7 +25,7 @@
                     <td>{{ $client->telephone }}</td>
                     <td>{{ $client->adresse }}</td>
                     <td>
-                        <a href="{{ route('clients.edit', $client->id) }}">Modifier</a>
+                        <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-warning">Modifier</a>
                         <!-- Add delete functionality if needed -->
                     </td>
                 </tr>
@@ -39,5 +35,9 @@
 
     {{ $clients->links() }} <!-- Pagination links -->
 
-</body>
-</html>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+@endsection
