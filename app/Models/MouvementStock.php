@@ -8,18 +8,23 @@ class MouvementStock extends Model
 {
     protected $fillable = [
             'produit_id',
-            'id_client',
-            'id_user',
+            'user_id',
             'quantite',
-            'type',
-            'date',
+            'type_mouvement',
+            'date_mouvement',
             'motif',
+            'vente_id',
     ];
 
-    public function produit()
+    public function user()
     {
-        return $this->belongsTo(Produit::class);
+        return $this->belongsTo(User::class);
     }
+    public function produit()
+{
+    return $this->belongsTo(Produit::class);
+}
+
 
     public function getTypeAttribute($value)
     {
