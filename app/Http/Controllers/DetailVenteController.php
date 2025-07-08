@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DetailVente;
 use Illuminate\Http\Request;
+use App\Models\Detail_Vente; // Assuming you meant to use this model
 
 class DetailVenteController extends Controller
 {
@@ -34,7 +35,7 @@ class DetailVenteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DetailVente $detailVente)
+    public function show(Detail_Vente $detailVente)
     {
         //
     }
@@ -42,7 +43,7 @@ class DetailVenteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DetailVente $detailVente)
+    public function edit(Detail_Vente $detailVente)
     {
         //
     }
@@ -50,7 +51,7 @@ class DetailVenteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DetailVente $detailVente)
+    public function update(Request $request, Detail_Vente $detailVente)
     {
         //
     }
@@ -58,7 +59,7 @@ class DetailVenteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DetailVente $detailVente)
+    public function destroy(Detail_Vente $detailVente)
     {
         //
     }

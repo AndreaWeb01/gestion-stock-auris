@@ -44,4 +44,38 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    /**
+     * Get the roles associated with the user.
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+}
+    /**
+     * Check if the user has a specific role.
+     */
+    public function hasRole($role)
+    {
+        return $this->roles()->where('nom', $role)->exists();
+    }
+
+    /**
+     * Get the full name of the user.
+     */
+    
+
+
+   public function ventes()
+    {
+        return $this->hasMany(Vente::class, 'user_id');
+    }
+
+    /**
+     * Get the movements associated with the user.
+     */
+    public function mouvements()
+    {
+        return $this->hasMany(MouvementStock::class, 'user_id');
+    }
+
 }

@@ -24,6 +24,11 @@ class Client extends Model
             $client->save();
         });
     }
+    // 🔁 Un client peut avoir plusieurs ventes
+    public function ventes()
+    {
+        return $this->hasMany(Vente::class, 'client_id');
+    }
 }
 
 
