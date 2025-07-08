@@ -22,7 +22,9 @@
                     <thead class="table-light">
                         <tr>
                             <th>Nom</th>
-                            <th>Quantité</th>
+                            <th>Total Entrées</th>
+                            <th>Total Sorties</th>
+                            <th>Stock Actuel</th>
                             <th>Prix (CFA)</th>
                             <th>Seuil d'alerte</th>
                             <th>Date</th>
@@ -31,29 +33,24 @@
                     </thead>
 
                     <tbody>
-                        @foreach ($produits as $produit)
-                        <tr>
+                        @foreach ($produits as $produit )
+                        @php
+                            $stock = $produit->mouvements->where('type_mouvement', 'entree')->sum('quantite') - $produit->mouvements->where('type_mouvement', 'sortie')->sum('quantite');
+                        @endphp
+                        <tr @if($stock < $produit->seuil_alerte) style="background-color: #f8d7da;" @endif>
                             <td>{{ $produit->nom }}</td>
-
-                            <td>
-                                <span class="badge bg-{{ $produit->quantite <= $produit->seuil_alerte ? 'danger' : 'success' }}">
-                                    {{ $produit->quantite }}
-                                </span>
-                            </td>
-
+                            <td>{{ $produit->mouvements->where('type_mouvement', 'entree')->sum('quantite') }}</td>
+                            <td>{{ $produit->mouvements->where('type_mouvement', 'sortie')->sum('quantite') }}</td>
+                            <td>{{ $stock }}</td>
                             <td>{{ $produit->prix }} CFA</td>
-
                             <td>
                                 <span class="badge bg-warning text-dark">{{ $produit->seuil_alerte }}</span>
                             </td>
-
                             <td>{{ \Carbon\Carbon::parse($produit->date)->format('d/m/Y') }}</td>
-
                             <td>
                                 <a href="{{ route('produits.edit', $produit->id) }}" class="btn btn-sm btn-warning">
                                     ✏️ Modifier
                                 </a>
-
                                 <form action="{{ route('produits.destroy', $produit->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
@@ -67,9 +64,7 @@
                     </tbody>
 
                 </table>
-                 <div>
-                        {{ $produits->links() }}
-                    </div>
+
 
             </div> <!-- end card-body -->
         </div> <!-- end card -->

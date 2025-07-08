@@ -10,15 +10,25 @@ class Produit extends Model
         'nom',
         'prix',
         'seuil_alerte',
+
     ];
+    public function mouvements()
+{
+    return $this->hasMany(MouvementStock::class);
+}
 
-    public function getPrixAttribute($value)
-    {
-        return number_format($value, 2, ',', ' ');
-    }
+// Optionnel : méthode personnalisée
+public function getStockAttribute()
+{
+    $entree = $this->mouvements()->where('type_mouvement', 'entrée')->sum('quantite');
+    $sortie = $this->mouvements()->where('type_mouvement', 'sortie')->sum('quantite');
+    return $entree - $sortie;
+}
 
-    public function setPrixAttribute($value)
+
+   
+    public function ventes()
     {
-        $this->attributes['prix'] = str_replace(',', '.', $value);
+        return $this->hasMany(Vente::class);
     }
 }

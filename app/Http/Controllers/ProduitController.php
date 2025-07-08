@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MouvementStock;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 
 class ProduitController extends Controller
 {
 
-    public function index()
-    {
-        $produits = Produit::paginate(20);
-        return view('admin.produits.index', compact('produits'));
-    }
+public function index()
+{
+    $produits = Produit::with('mouvements')->get();
+    return view('admin.produits.index', compact('produits'));
+}
 
 
     public function create()
@@ -65,4 +66,21 @@ class ProduitController extends Controller
 
         return redirect()->route('produits.index')->with('success', 'Produit supprimé avec succès.');
     }
+    public function indexAlerte()
+{
+    // Charge tous les produits avec leurs mouvements
+    $produits = Produit::with('mouvements')->get();
+
+    // Filtre ceux dont le stock est inférieur ou égal au seuil
+    $produitsAlerte = $produits->filter(function ($produit) {
+        $entree = $produit->mouvements->where('type_mouvement', 'entrée')->sum('quantite');
+        $sortie = $produit->mouvements->where('type_mouvement', 'sortie')->sum('quantite');
+        $stock = $entree - $sortie;
+
+        return $stock <= $produit->seuil_d_alerte;
+    });
+
+    return view('produits.alertes', compact('produitsAlerte'));
+}
+
 }
