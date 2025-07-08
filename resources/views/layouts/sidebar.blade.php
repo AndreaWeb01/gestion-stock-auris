@@ -31,12 +31,35 @@
 
                     <li class="menu-title">Custom</li>
                     <li class="menu-item">
-                    <a href="#menuExpages" data-bs-toggle="collapse" class="menu-link waves-effect">
+                    <a href="#Ventes" data-bs-toggle="collapse" class="menu-link waves-effect">
                         <span class="menu-icon"><i data-lucide="product"></i></span>
                         <span class="menu-text"> Produit  </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="menuExpages">
+                    <div class="collapse" id="Ventes">
+                        <ul class="sub-menu">
+                            <li class="menu-item">
+                                <a href="{{ route('ventes.create') }}" class="menu-link">
+                                    <span class="menu-text">Creer Vente</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('ventes.index') }}" class="menu-link">
+                                    <span class="menu-text">Liste Ventes</span>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </li>
+                    <li class="menu-item">
+                    <a href="#Produit" data-bs-toggle="collapse" class="menu-link waves-effect">
+                        <span class="menu-icon"><i data-lucide="product"></i></span>
+                        <span class="menu-text"> Produit  </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="Produit">
                         <ul class="sub-menu">
                             <li class="menu-item">
                                 <a href="{{ route('produits.create') }}" class="menu-link">
@@ -54,12 +77,12 @@
                     </div>
                 </li>
                     <li class="menu-item">
-                        <a href="#menuExpages" data-bs-toggle="collapse" class="menu-link waves-effect">
+                        <a href="#Stocks" data-bs-toggle="collapse" class="menu-link waves-effect">
                             <span class="menu-icon"><i data-lucide=""></i></span>
                             <span class="menu-text">Stocks</span>
                             <span class="menu-arrow"></span>
                         </a>
-                        <div class="collapse" id="menuExpages">
+                        <div class="collapse" id="Stocks">
                             <ul class="sub-menu">
                                 <li class="menu-item">
                                     <a href="{{ route('mouvementStocks.create') }}" class="menu-link">

@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('mouvement_stocks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('produit_id')->constrained()->onDelete('cascade');
-            $table->foreignId('id_client')->constrained('clients')->onDelete('cascade');
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->nullable();
+            $table->foreignId('vente_id')->nullable()->constrained('ventes')->nullOnDelete();
             $table->integer('quantite');
-            $table->enum('type', ['entree', 'sortie']);
-            $table->date('date');
+            $table->enum('type_mouvement', ['entree', 'sortie']);
+            $table->date('date_mouvement');
             $table->string('motif')->nullable();
             $table->timestamps();
         });

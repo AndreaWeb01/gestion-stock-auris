@@ -129,6 +129,7 @@
 
         <!-- Datatables js -->
         <script src="assets/js/pages/datatables.js"></script>
+        @yield('scripts')
 
 </body>
 
