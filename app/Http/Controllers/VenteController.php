@@ -16,9 +16,36 @@ use Illuminate\Support\Str;
 
 class VenteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $ventes = Vente::with(['client', 'user'])->paginate(10);
+        $ventes = Vente::with(['client', 'user']);
+
+        // Filtrage par période
+        if ($request->periode && $request->date_debut && $request->date_fin) {
+            $dateDebut = $request->date_debut;
+            $dateFin = $request->date_fin;
+            $ventes = $ventes->whereBetween('date_vente', [$dateDebut, $dateFin]);
+        }
+
+        // Recherche textuelle
+        if ($request->q) {
+            $q = $request->q;
+            $ventes = $ventes->where(function($query) use ($q) {
+                $query->where('code_recu', 'like', "%$q%")
+                      ->orWhereHas('client', function($sub) use ($q) {
+                          $sub->where('nom', 'like', "%$q%")
+                               ->orWhere('prenom', 'like', "%$q%")
+                               ->orWhere('email', 'like', "%$q%") ;
+                      })
+                      ->orWhereHas('user', function($sub) use ($q) {
+                          $sub->where('nom', 'like', "%$q%")
+                               ->orWhere('prenom', 'like', "%$q%")
+                               ->orWhere('email', 'like', "%$q%") ;
+                      });
+            });
+        }
+
+        $ventes = $ventes->orderByDesc('date_vente')->paginate(15);
         return view('admin.ventes.index', compact('ventes'));
     }
 
@@ -58,7 +85,6 @@ public function store(Request $request)
                 $numero = intval($matches[1]) + 1;
             }
             $code_recu = 'RECU_' . $annee . $mois . '_' . str_pad($numero, 4, '0', STR_PAD_LEFT);
-dd($code_recu);
      DB::beginTransaction();
 
     try {
@@ -72,6 +98,16 @@ dd($code_recu);
             'mode_paiement' => $request->mode_paiement,
             'code_recu' => isset($code_recu) ? $code_recu : '',
         ]);
+
+        // Vérification du stock pour chaque produit
+        foreach ($request->produits as $produit) {
+            $produitModel = Produit::find($produit['produit_id']);
+            $stockActuel = $produitModel->mouvements()->where('type_mouvement', 'entree')->sum('quantite')
+                - $produitModel->mouvements()->where('type_mouvement', 'sortie')->sum('quantite');
+            if ($produit['quantite'] > $stockActuel) {
+                return back()->with('error', 'Stock insuffisant pour le produit : ' . $produitModel->nom);
+            }
+        }
 
         // Générer le PDF après la création des détails
         foreach ($request->produits as $produit) {
@@ -104,13 +140,13 @@ dd($code_recu);
     } catch (\Exception $e) {
         DB::rollBack();
         return back()->with('error', 'Erreur : ' . $e->getMessage());
-    } 
     }
-    
+    }
+
     public function show(Vente $vente)
     {
-        $vente->load(['client', 'utilisateur', 'produits']);
-        return view('admin.ventes.show', compact('vente'));
+        $vente->load(['client', 'user', 'details.produit']);
+        return view('admin.ventes.detail_vente', compact('vente'));
     }
     public function edit(Vente $vente)
     {
@@ -147,6 +183,48 @@ dd($code_recu);
 
         return redirect()->route('admin.ventes.index')->with('success', 'Vente supprimée avec succès');
     }
+public function annulerVente($id, Request $request)
+{
+    $vente = Vente::with('details')->findOrFail($id);
+
+
+    if ($vente->statut === 'annulée') {
+        return back()->with('error', 'Cette vente est déjà annulée.');
+    }
+
+    DB::beginTransaction();
+
+    try {
+
+        $vente->update([
+            'statut' => 'annulée',
+            'motif_annulation' => $request->motif, // optionnel
+            'annulee_par' => auth()->id(),
+            'date_annulation' => now(),
+        ]);
+
+
+        foreach ($vente->details as $ligne) {
+            MouvementStock::create([
+                'id_produit' => $ligne->id_produit,
+                'id_utilisateur' => auth()->id(),
+                'quantite' => $ligne->quantite,
+                'motif' => 'Annulation vente #' . $vente->id,
+                'type_mouvement' => 'entree',
+                'date_mouvement' => now(),
+            ]);
+        }
+
+        DB::commit();
+
+        return redirect()->route('ventes.index')->with('success', 'Vente annulée et stock restauré.');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return back()->with('error', 'Erreur lors de l’annulation : ' . $e->getMessage());
+    }
+}
+
+
 }
 
 
