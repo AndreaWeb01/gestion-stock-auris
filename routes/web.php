@@ -14,3 +14,4 @@ Route::resource('produits', ProduitController::class);
 Route::resource('clients', ClientController::class);
 Route::resource('mouvementStocks', MouvementStockController::class);
 Route::resource('ventes', VenteController::class);
+Route::put('ventes/annuler', [VenteController::class, 'annulerVente'])->name('ventes.annuler');

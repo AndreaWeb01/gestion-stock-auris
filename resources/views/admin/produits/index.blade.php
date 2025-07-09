@@ -14,12 +14,10 @@
             </div>
 
             <div class="card-body">
-                <p class="text-muted">
-                    L'extension <strong>Buttons</strong> pour <strong>DataTables</strong> fournit un ensemble d'options et de méthodes API pour interagir avec un tableau de manière stylée et dynamique.
-                </p>
+
 
                 <table id="datatable-buttons" class="table table-hover table-bordered dt-responsive nowrap w-100">
-                    <thead class="table-light">
+                    <thead class="table-dark">
                         <tr>
                             <th>Nom</th>
                             <th>Total Entrées</th>
@@ -34,14 +32,12 @@
 
                     <tbody>
                         @foreach ($produits as $produit )
-                        @php
-                            $stock = $produit->mouvements->where('type_mouvement', 'entree')->sum('quantite') - $produit->mouvements->where('type_mouvement', 'sortie')->sum('quantite');
-                        @endphp
-                        <tr @if($stock < $produit->seuil_alerte) style="background-color: #f8d7da;" @endif>
+
+                        <tr @php $stock = $produit->stock_actuel; @endphp @if($stock < $produit->seuil_alerte) style="background-color: #f8d7da;" @endif>
                             <td>{{ $produit->nom }}</td>
                             <td>{{ $produit->mouvements->where('type_mouvement', 'entree')->sum('quantite') }}</td>
                             <td>{{ $produit->mouvements->where('type_mouvement', 'sortie')->sum('quantite') }}</td>
-                            <td>{{ $stock }}</td>
+                            <td>{{ $produit->stock_actuel }}</td>
                             <td>{{ $produit->prix }} CFA</td>
                             <td>
                                 <span class="badge bg-warning text-dark">{{ $produit->seuil_alerte }}</span>
@@ -62,10 +58,8 @@
                         </tr>
                         @endforeach
                     </tbody>
-
                 </table>
-
-
+                {{ $produits->appends(request()->query())->links() }}
             </div> <!-- end card-body -->
         </div> <!-- end card -->
     </div> <!-- end col -->

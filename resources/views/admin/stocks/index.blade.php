@@ -26,6 +26,7 @@
                             <th>Utilisateur</th>
                             <th>Type de mouvement</th>
                             <th>Quantité</th>
+                            <th>Stock après mouvement</th>
                             <th>Motif</th>
                             <th>Date du mouvement</th>
                             <th>Action</th>
@@ -40,6 +41,7 @@
                             <td>{{ $mouvement->user->nom }}</td>
                             <td>{{ $mouvement->type_mouvement }}</td>
                             <td>{{ $mouvement->quantite }}</td>
+                            <td>{{ $mouvement->produit->stock_actuel }}</td>
                             <td>{{ $mouvement->motif }}</td>
                             <td>{{ \Carbon\Carbon::parse($mouvement->date_mouvement)->format('d/m/Y') }}</td>
                             <td>

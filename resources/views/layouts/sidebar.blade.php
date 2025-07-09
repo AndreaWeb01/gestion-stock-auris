@@ -32,8 +32,8 @@
                     <li class="menu-title">Custom</li>
                     <li class="menu-item">
                     <a href="#Ventes" data-bs-toggle="collapse" class="menu-link waves-effect">
-                        <span class="menu-icon"><i data-lucide="product"></i></span>
-                        <span class="menu-text"> Produit  </span>
+                        <span class="menu-icon"><i data-lucide="badge-dollar-sign"></i></span>
+                        <span class="menu-text"> Ventes  </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="Ventes">
@@ -55,7 +55,7 @@
                 </li>
                     <li class="menu-item">
                     <a href="#Produit" data-bs-toggle="collapse" class="menu-link waves-effect">
-                        <span class="menu-icon"><i data-lucide="product"></i></span>
+                        <span class="menu-icon"><i data-lucide="package-search"></i></span>
                         <span class="menu-text"> Produit  </span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -78,7 +78,7 @@
                 </li>
                     <li class="menu-item">
                         <a href="#Stocks" data-bs-toggle="collapse" class="menu-link waves-effect">
-                            <span class="menu-icon"><i data-lucide=""></i></span>
+                            <span class="menu-icon"><i data-lucide="warehouse"></i></span>
                             <span class="menu-text">Stocks</span>
                             <span class="menu-arrow"></span>
                         </a>
@@ -100,7 +100,7 @@
                     </li>
                     <li class="menu-item">
                         <a href="#menuClients" data-bs-toggle="collapse" class="menu-link waves-effect">
-                            <span class="menu-icon"><i data-lucide=""></i></span>
+                            <span class="menu-icon"><i data-lucide="users-round"></i></span>
                             <span class="menu-text"> Clients </span>
                             <span class="menu-arrow"></span>
                         </a>

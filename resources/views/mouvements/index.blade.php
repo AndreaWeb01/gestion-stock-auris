@@ -14,6 +14,7 @@
                 <th>Produit</th>
                 <th>Type</th>
                 <th>Quantité</th>
+                <th>Stock Actuel</th>
                 <th>Date</th>
                 <th>Actions</th>
             </tr>
@@ -25,6 +26,7 @@
                     <td>{{ $mouvement->produit->nom ?? 'N/A' }}</td>
                     <td>{{ ucfirst($mouvement->type) }}</td>
                     <td>{{ $mouvement->quantite }}</td>
+                    <td>{{ $mouvement->produit->stock_actuel ?? 'N/A' }}</td>
                     <td>{{ $mouvement->created_at->format('d/m/Y') }}</td>
                     <td>
                         <a href="{{ route('mouvementStocks.show', $mouvement) }}" class="btn btn-info btn-sm">Voir</a>

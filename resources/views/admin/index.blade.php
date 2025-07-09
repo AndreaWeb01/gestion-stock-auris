@@ -1,13 +1,7 @@
 @extends('layouts.base')
 @section('content')
 
-      <div class="page-content">
-
-            <!-- ========== Topbar Start ========== -->
-           @include('layouts.top-bar')
-            <!-- ========== Topbar End ========== -->
-
-            <div class="px-3">
+<div class="px-3">
 
                 <!-- Start Content-->
                 <div class="container-fluid">
@@ -227,6 +221,28 @@
 
 
 
+                                                <tr>
+                                                    <td>
+                                                        <h5 class="font-size-15 mb-1 font-weight-normal">4257 **** ****
+                                                            7852</h5>
+                                                        <span class="text-muted font-size-12">12 Nov 2024</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="font-size-15 mb-1 font-weight-normal">$8964.04</h5>
+                                                        <span class="text-muted font-size-12">Amount</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="font-size-17 mb-1 font-weight-normal"><i
+                                                                class="fab fa-cc-visa"></i></h5>
+                                                        <span class="text-muted font-size-12">Card</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="font-size-15 mb-1 font-weight-normal">Caitlyn Gibney
+                                                        </h5>
+                                                        <span class="text-muted font-size-12">Pay</span>
+                                                    </td>
+                                                </tr>
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -240,7 +256,4 @@
                 </div> <!-- container -->
 
             </div> <!-- content -->
-
-        </div> <!-- page-content -->
-            @endsection
-
+    @endsection
