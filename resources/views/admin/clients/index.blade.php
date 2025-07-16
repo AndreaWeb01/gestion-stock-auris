@@ -1,12 +1,27 @@
 @extends('layouts.base')
 @section('title', 'Liste des Clients')
 @section('content')
-    <h1>Liste des Clients</h1>
 
-    <a href="{{ route('clients.create') }}">Créer un nouveau client</a>
+@section('content')
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header gb-dark text-white d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">Liste des clients</h4>
+                <a href="{{ route('clients.create') }}" class="btn btn-light btn-sm">
+                    ➕ Nouveau client
+                </a>
+            </div>
+
+            <div class="card-body">
+     @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <table id="datatable-buttons" class="table table-hover table-bordered dt-responsive nowrap w-100">
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th>Code Client</th>
                 <th>Nom</th>
@@ -34,10 +49,10 @@
     </table>
 
     {{ $clients->links() }} <!-- Pagination links -->
+ </div> <!-- end card-body -->
+        </div> <!-- end card -->
+    </div> <!-- end col -->
+</div>
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+
 @endsection

@@ -46,6 +46,7 @@
                         </li>
 
 
+
                         <li class="dropdown d-none d-md-inline-block">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                                 <img src="{{url('assets/images/flags/us.jpg')}}" alt="user-image" class="me-0 me-sm-1" height="18">
@@ -96,7 +97,7 @@
 
                                 <div class="px-1" style="max-height: 300px;" data-simplebar>
 
-                                    <h5 class="text-muted font-size-13 fw-normal mt-2">Today</h5>
+                                    <h5 class="text-muted font-size-13 fw-normal mt-2">{{$date=now()}}</h5>
                                     <!-- item-->
 
                                     <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-1">
@@ -217,7 +218,7 @@
                             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-dark" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                                 <img src="{{url('assets/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle">
                                 <span class="ms-1 d-none d-md-inline-block">
-                                    Henry <i class="mdi mdi-chevron-down"></i>
+                                    {{Auth::user()->nom}} <i class="mdi mdi-chevron-down"></i>
                                 </span>
                             </a>
 
@@ -230,13 +231,13 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i data-lucide="user" class="font-size-16 me-2"></i>
-                                    <span>My Account</span>
+                                    <span>Mon profile</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i data-lucide="settings" class="font-size-16 me-2"></i>
-                                    <span>Settings</span>
+                                    <span>parametre</span>
                                 </a>
 
                                 <!-- item-->
@@ -248,9 +249,13 @@
                                 <div class="dropdown-divider"></div>
 
                                 <!-- item-->
-                                <a href="pages-login.html" class="dropdown-item notify-item">
-                                    <i data-lucide="log-out" class="font-size-16 me-2"></i>
-                                    <span>Logout</span>
+                                <a href="{{route('logout')}}" class="dropdown-item notify-item">
+                                    <form action="{{route('logout')}}" method="POST">
+                                        @csrf
+                                        <i data-lucide="log-out" class="font-size-16 me-2"></i>
+                                        <button type="submit" class="btn btn-sm btn-primary">Deconnexion</button>
+                                    </form>
+
                                 </a>
 
                             </div>

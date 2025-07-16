@@ -2,64 +2,70 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UtilisateurController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+      public function index()
     {
-        //
+        $users = User::all();
+        return view('users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+        'nom' => 'required|string',
+        'prenom' => 'required|string',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|string|min:6',
+        'telephone' => 'required|string',
+
+        ]);
+
+        User::create([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'telephone'=>$request->telephone,
+            'role'=>$request->role,
+        ]);
+
+        return redirect()->route('users.index')->with('success', 'Utilisateur ajouté.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Utilisateur $utilisateur)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Utilisateur $utilisateur)
+    public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string',
+            'prenom' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . $user->id,//.$user->id,
+            'telephone' => 'required|string',
+            'password' => 'required|string|min:6',
+        ]);
+
+        $user->update($request->only('nom','prenom', 'email','telephone','role'));
+
+        return redirect()->route('users.index')->with('success', 'Utilisateur modifié.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Utilisateur $utilisateur)
+    public function destroy(User $user)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Utilisateur $utilisateur)
-    {
-        //
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'Utilisateur supprimé.');
     }
 }

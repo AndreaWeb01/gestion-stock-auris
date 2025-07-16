@@ -15,7 +15,8 @@ class Vente extends Model
         'date_vente',
         'mode_paiement',
         'pdf_recu',
-        'code_recu', // Ajouté pour permettre l'enregistrement du code reçu
+        'code_recu',
+        'statut',// Ajouté pour permettre l'enregistrement du code reçu
     ];
 
     public function client()
@@ -34,6 +35,6 @@ class Vente extends Model
     {
         return $this->hasMany(Detail_Vente::class);
     }
-    
+
 
 }

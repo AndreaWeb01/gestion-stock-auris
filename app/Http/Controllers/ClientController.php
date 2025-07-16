@@ -10,7 +10,7 @@ class ClientController extends Controller
 
     public function index()
     {
-        $clients = Client::paginate(10);
+        $clients = Client::paginate(2);
         return view('clients.index', compact('clients'));
     }
 
@@ -58,9 +58,9 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
         $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenoms' => 'required|string|max:255',
-            'telephone' => 'nullable|string|max:20',
+             'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'telephone' => 'nu llable|string|max:20',
             'adresse' => 'nullable|string|max:255',
         ]);
 

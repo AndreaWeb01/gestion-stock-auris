@@ -47,12 +47,13 @@
                                 <a href="{{ route('produits.edit', $produit->id) }}" class="btn btn-sm btn-warning">
                                     ✏️ Modifier
                                 </a>
-                                <form action="{{ route('produits.destroy', $produit->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Supprimer ce produit ?')">
-                                        🗑️ Supprimer
-                                    </button>
+                                <form id="delete-form-{{ $produit->id }}" action="{{ route('permissions.destroy', $produit) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-sm btn-danger btn-delete" data-form-id="delete-form-{{ $produit->id }}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+
                                 </form>
                             </td>
                         </tr>

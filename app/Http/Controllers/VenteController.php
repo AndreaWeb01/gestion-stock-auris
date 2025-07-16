@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Vente;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -63,7 +64,6 @@ public function store(Request $request)
 
     $request->validate([
         'client_id' => 'required|exists:clients,id',
-        'user_id' => 'required|exists:users,id',
         'montant_total' => 'required|numeric|min:0',
         'remise' => 'nullable|numeric|min:0',
         'date_vente' => 'required|date',
@@ -76,28 +76,35 @@ public function store(Request $request)
             $mois = $date->format('m');
             $jour= $date->format('d');
             // Vérifier le dernier code reçu pour générer le nouveau code
-            $dernierVente = Vente::whereYear('created_at', $annee)
+                        $dernierVente = Vente::whereYear('created_at', $annee)
                 ->whereMonth('created_at', $mois)
                 ->orderByDesc('id')
                 ->first();
             $numero = 1;
-            if ($dernierVente && preg_match('/REC-\d{4}-\d{2}-(\d+)/', $dernierVente->code_recu, $matches)) {
+            if ($dernierVente && preg_match('/RECU_\\d{6}_(\\d{4})/', $dernierVente->code_recu, $matches)) {
                 $numero = intval($matches[1]) + 1;
             }
             $code_recu = 'RECU_' . $annee . $mois . '_' . str_pad($numero, 4, '0', STR_PAD_LEFT);
-     DB::beginTransaction();
 
-    try {
-        // Créer la vente principale
-        $vente = Vente::create([
+            // Vérifier l'unicité du code_recu
+            while (Vente::where('code_recu', $code_recu)->exists()) {
+                $numero++;
+                $code_recu = 'RECU_' . $annee . $mois . '_' . str_pad($numero, 4, '0', STR_PAD_LEFT);
+            }
+            DB::beginTransaction();
+
+            try {
+                // Créer la vente principale
+                $vente = Vente::create([
             'client_id' => $request->client_id,
-            'user_id' => $request->user_id,
+            'user_id' => Auth::user()->id,
             'date_vente' => $request->date_vente,
             'montant_total' => $request->montant_total,
             'remise' => $request->remise,
             'mode_paiement' => $request->mode_paiement,
             'code_recu' => isset($code_recu) ? $code_recu : '',
         ]);
+
 
         // Vérification du stock pour chaque produit
         foreach ($request->produits as $produit) {
@@ -119,14 +126,15 @@ public function store(Request $request)
                 'prix' => $produit['prix'],
                 'total' => $total,
             ]);
-            MouvementStock::create([
+            $stock=MouvementStock::create([
                 'produit_id' => $produit['produit_id'],
-                'user_id' => $request->user_id,
+                'user_id' => Auth::user()->id,
                 'quantite' => $produit['quantite'],
                 'motif' => 'Vente',
                 'type_mouvement' => 'sortie',
                 'date_mouvement' => $request->date_vente,
             ]);
+
         }
 
         $vente->load(['client', 'user', 'details.produit']);
@@ -134,7 +142,7 @@ public function store(Request $request)
         $filename = 'recu_vente_'.$vente->client->nom.'_'.$vente->code_recu.'.pdf';
         Storage::put('public/recus/' . $filename, $pdf->output());
         $vente->update(['pdf_recu' => 'recus/' . $filename]);
-
+        DB::commit();
         return redirect()->route('ventes.index')->with('success', 'Vente enregistrée avec succès.');
 
     } catch (\Exception $e) {
@@ -177,18 +185,17 @@ public function store(Request $request)
         if ($vente->pdf_recu) {
             Storage::delete('public/' . $vente->pdf_recu);
         }
-
         // Supprimer la vente
         $vente->delete();
-
+        $vente->details()->delete();
         return redirect()->route('admin.ventes.index')->with('success', 'Vente supprimée avec succès');
     }
-public function annulerVente($id, Request $request)
+    public function annulerVente($id, Request $request)
 {
     $vente = Vente::with('details')->findOrFail($id);
 
 
-    if ($vente->statut === 'annulée') {
+    if ($vente->statut === 'annulee') {
         return back()->with('error', 'Cette vente est déjà annulée.');
     }
 
@@ -197,17 +204,14 @@ public function annulerVente($id, Request $request)
     try {
 
         $vente->update([
-            'statut' => 'annulée',
-            'motif_annulation' => $request->motif, // optionnel
-            'annulee_par' => auth()->id(),
-            'date_annulation' => now(),
+            'statut' => 'annulee',
         ]);
 
 
         foreach ($vente->details as $ligne) {
             MouvementStock::create([
-                'id_produit' => $ligne->id_produit,
-                'id_utilisateur' => auth()->id(),
+                'produit_id' => $ligne->produit_id,
+                'user_id' => Auth::user()->id,
                 'quantite' => $ligne->quantite,
                 'motif' => 'Annulation vente #' . $vente->id,
                 'type_mouvement' => 'entree',
@@ -223,6 +227,7 @@ public function annulerVente($id, Request $request)
         return back()->with('error', 'Erreur lors de l’annulation : ' . $e->getMessage());
     }
 }
+
 
 
 }

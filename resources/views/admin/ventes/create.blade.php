@@ -11,6 +11,12 @@
     <form class="needs-validation" novalidate method="POST" action="{{ route('ventes.store') }}">
         @csrf
 
+            @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
         {{-- Client & utilisateur --}}
         <div class="row mb-3">
             <div class="col-md-6">
@@ -22,15 +28,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-6">
-                <label class="form-label" >Utilisateur</label>
-                <select name="user_id" class="form-control" required>
-                    <option value="">-- Choisir un utilisateur --</option>
-                    @foreach($utilisateurs as $user)
-                        <option value="{{ $user->id }}">{{ $user->nom }}</option>
-                    @endforeach
-                </select>
-            </div>
+
         </div>
 
         {{-- Tableau des produits --}}

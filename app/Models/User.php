@@ -6,20 +6,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable; use HasRoles;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
+     */  protected $fillable = [
+        'nom',
+        'prenom',
         'email',
         'password',
+        'telephone',
+        'role_id',
     ];
 
     /**
@@ -47,22 +50,16 @@ class User extends Authenticatable
     /**
      * Get the roles associated with the user.
      */
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-}
+
     /**
      * Check if the user has a specific role.
      */
-    public function hasRole($role)
-    {
-        return $this->roles()->where('nom', $role)->exists();
-    }
+  
 
     /**
      * Get the full name of the user.
      */
-    
+
 
 
    public function ventes()

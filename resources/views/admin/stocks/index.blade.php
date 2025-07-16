@@ -48,14 +48,14 @@
                                 <a href="{{ route('mouvementStocks.edit', $mouvement->id) }}" class="btn btn-sm btn-warning">
                                     ✏️ Modifier
                                 </a>
+    <form id="delete-form-{{ $mouvement->id }}" action="{{ route('mouvementStocks.destroy', $mouvement->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-sm btn-danger btn-delete" data-form-id="delete-form-{{ $mouvement->id }}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
 
-                                <form action="{{ route('mouvementStocks.destroy', $mouvement->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Supprimer ce mouvement ?')">
-                                        🗑️ Supprimer
-                                    </button>
-                                </form>
+                                            </form>
                             </td>
                         </tr>
                         @endforeach

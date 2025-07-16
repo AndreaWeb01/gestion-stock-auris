@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('code_recu')->unique()->nullable();
             $table->integer('montant_total');
             $table->integer('remise')->nullable();
+            $table->enum('statut', ['valide', 'annulee'])->default('valide');
             $table->date('date_vente');
             $table->string('mode_paiement');
             $table->string('pdf_recu')->nullable();

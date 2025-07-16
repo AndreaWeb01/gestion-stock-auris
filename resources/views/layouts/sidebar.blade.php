@@ -22,7 +22,7 @@
                     <li class="menu-title">Menu</li>
 
                     <li class="menu-item">
-                        <a href="index.html" class="menu-link waves-effect">
+                        <a href="{{route('dashboard')}}" class="menu-link waves-effect">
                             <span class="menu-icon"><i data-lucide="airplay "></i></span>
                             <span class="menu-text"> Dashboards </span>
                             <span class="badge bg-info rounded-pill ms-auto">3</span>
@@ -61,11 +61,13 @@
                     </a>
                     <div class="collapse" id="Produit">
                         <ul class="sub-menu">
+                            @can('Créer / modifier / supprimer produit')
                             <li class="menu-item">
                                 <a href="{{ route('produits.create') }}" class="menu-link">
                                     <span class="menu-text">Creer Produit</span>
                                 </a>
                             </li>
+                            @endcan
                             <li class="menu-item">
                                 <a href="{{ route('produits.index') }}" class="menu-link">
                                     <span class="menu-text">Liste Produits</span>
@@ -106,6 +108,9 @@
                         </a>
                         <div class="collapse" id="menuClients">
                             <ul class="sub-menu">
+                                @can('')
+
+                                @endcan
                                 <li class="menu-item">
                                     <a href="{{ route('clients.create') }}" class="menu-link">
                                         <span class="menu-text">Nouveau Client</span>
@@ -120,28 +125,77 @@
                             </ul>
                         </div>
                     </li>
+                    @can('isAdmin')
                     <li class="menu-item">
-                        <a href="#menuExpages" data-bs-toggle="collapse" class="menu-link waves-effect">
-                            <span class="menu-icon"><i data-lucide=""></i></span>
-                            <span class="menu-text"> Ventes </span>
+                        <a href="#menuUsers" data-bs-toggle="collapse" class="menu-link waves-effect">
+                            <span class="menu-icon"><i data-lucide="users"></i></span>
+                            <span class="menu-text"> Utilisateurs </span>
                             <span class="menu-arrow"></span>
                         </a>
-                        <div class="collapse" id="menuExpages">
+                        <div class="collapse" id="menuUsers">
                             <ul class="sub-menu">
                                 <li class="menu-item">
-                                    <a href="pages-starter.html" class="menu-link">
-                                        <span class="menu-text">Nouvelle Vente</span>
+                                    <a href="{{route('users.create')}}" class="menu-link">
+                                        <span class="menu-text">Nouveau utiisateur</span>
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="pages-invoice.html" class="menu-link">
-                                        <span class="menu-text">Liste Ventes</span>
+                                    <a href="{{route('users.index')}}" class="menu-link">
+                                        <span class="menu-text">Liste utilisateur</span>
                                     </a>
                                 </li>
 
                             </ul>
                         </div>
                     </li>
+                    <li class="menu-item">
+                        <a href="#role" data-bs-toggle="collapse" class="menu-link waves-effect">
+                            <span class="menu-icon"><i data-lucide="scale"></i></span>
+                            <span class="menu-text"> roles </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="role">
+                            <ul class="sub-menu">
+                                <li class="menu-item">
+                                    <a href="{{route('roles.create')}}" class="menu-link">
+                                        <span class="menu-text">Nouveau roles</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="{{route('roles.index')}}" class="menu-link">
+                                        <span class="menu-text">Liste roles</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#Permission" data-bs-toggle="collapse" class="menu-link waves-effect">
+                            <span class="menu-icon"><i data-lucide="ruler"></i></span>
+                            <span class="menu-text"> Permission </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="Permission">
+                            <ul class="sub-menu">
+                                <li class="menu-item">
+                                    <a href="{{route('permissions.create')}}" class="menu-link">
+                                        <span class="menu-text">Nouvelle permission</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="{{route('permissions.index')}}" class="menu-link">
+                                        <span class="menu-text">Liste permission</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+                    @endcan
+
+
+
 
                 </ul>
             </div>

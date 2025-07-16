@@ -58,11 +58,28 @@
                     <!-- start page title -->
 
 
-        @yield('content')
+             @yield('content')
+             @stack('scripts')
 
-    </div>
 
+         </div>
+    </div><h3>Exporter</h3>
+<p>Exporter la table "clients" en Excel</p>
 
+<form method="POST" action="{{ route('export') }}" >
+
+    @csrf
+
+    <input type="text" name="name" placeholder="Nom de fichier" >
+
+    <select name="extension" >
+        <option value="xlsx" >.xlsx</option>
+        <option value="csv" >.csv</option>
+    </select>
+
+    <button type="submit" >Exporter</button>
+
+</form>
           <!-- Footer Start -->
             <footer class="footer">
                 <div class="container-fluid">
@@ -78,8 +95,6 @@
                     </div>
                 </div>
             </footer>
-            <!-- end Footer -->
-
         </div>
 
         <!-- ============================================================== -->
@@ -91,7 +106,33 @@
 
     <!-- App js -->
     <script src="{{url('assets/js/vendor.min.js')}}"></script>
-    <script src="{{url('assets/js/app.js')}}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.btn-delete').on('click', function () {
+            const formId = $(this).data('form-id');
+
+            Swal.fire({
+                title: 'Êtes-vous sûr ?',
+                text: "Cette action est irréversible !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Oui, supprimer !',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#' + formId).submit();
+                }
+            });
+        });
+    });
+</script>
+
+
+
 
     <!-- Jquery Sparkline Chart  -->
     <script src="{{url('assets/libs/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
@@ -108,27 +149,36 @@
     <!-- Dashboard init-->
     <script src="{{url('assets/js/pages/dashboard.js')}}"></script>
 
-    <script src="assets/js/vendor.min.js"></script>
-        <script src="assets/js/app.js"></script>
+    <script src="{{url('assets/js/vendor.min.js')}}"></script>
+        <script src="{{url('assets/js/app.js')}}"></script>
 
         <!-- third party js -->
-        <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
-        <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons/js/buttons.flash.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-        <script src="assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-        <script src="assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
-        <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
-        <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+        <script src="{{url('assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{url('assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js')}}"></script>
+        <script src="{{url('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+        <script src="{{url('assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js')}}"></script>
+        <script src="{{url('assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+        <script src="{{url('assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js')}}"></script>
+        <script src="{{url('assets/libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+        <script src="{{url('assets/libs/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+        <script src="{{url('assets/libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+        <script src="{{url('assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
+        <script src="{{url('assets/libs/datatables.net-select/js/dataTables.select.min.js')}}"></script>
+        <script src="{{url('assets/libs/pdfmake/build/pdfmake.min.js')}}"></script>
+        <script src="{{url('assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
         <!-- third party js ends -->
 
         <!-- Datatables js -->
-        <script src="assets/js/pages/datatables.js"></script>
+        <script src="{{url('assets/js/pages/datatables.js')}}"></script>
+        <!-- jQuery (si non déjà inclus) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
         @yield('scripts')
 
 </body>

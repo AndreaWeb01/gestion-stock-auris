@@ -2,9 +2,12 @@
 @section('content')
 <div class="container">
     <div class="card mb-3">
-        <div class="card-header">
-            <h4 class="mb-0">Historique des ventes</h4>
-        </div>
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">📦 Liste des ventes</h4>
+                <a href="{{ route('ventes.create') }}" class="btn btn-light btn-sm">
+                    ➕Nouvelle vente
+                </a>
+            </div>
         <div class="card-body">
             <p>Consultez l'historique des ventes effectuées.</p>
 
@@ -39,9 +42,19 @@
             </div>
         </div>
     </form>
+    @if (session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+    @endif
+    @if (session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session()->get('error') }}
+    </div>
+    @endif
 
-    <table class="table table-bordered">
-        <thead>
+    <table class="table table-hover table-bordered dt-responsive nowrap w-100">
+        <thead class="table-dark">
             <tr>
                 <th>Code reçu</th>
                 <th>Client</th>
@@ -50,25 +63,43 @@
                 <th>Date</th>
                 <th>Montant total</th>
                 <th>Remise</th>
-                <th>Actions</th>
+
+               <th>Actions</th>
+
+
             </tr>
         </thead>
         <tbody>
             @foreach($ventes as $vente)
-            <tr @if ($vente->status='validee') style="background-color:#f8d7da ;"
+            <tr @if ($vente->statut=='valide') style="background-color:#d4edda;"
+            @elseif ($vente->statut=='annulee') style="background-color:#f8d7da ;"
+
+            @else style="background-color:#e2e3e5 ;"
             @endif>
                 <td>{{ $vente->code_recu }}</td>
                 <td>{{ $vente->client->nom ?? '' }}</td>
                 <td>{{ $vente->user->nom ?? '' }}</td>
-                <td>{{$vente->statut ?? ''}}
+                <td>
+                    @if ($vente->statut=='valide')
+                        <span class="badge bg-success">Validée</span>
+                    @elseif ($vente->statut=='annulee')
+                        <span class="badge bg-danger">Annulée</span>
+                    @else
+                        <span style="background-color:#214ea7 ;">{{ $vente->statut }}</span>
+                    @endif
+
+                </td>
                 <td>{{ $vente->date_vente }}</td>
                 <td>{{ number_format($vente->montant_total, 0, ',', ' ') }} FCFA</td>
                 <td>{{ number_format($vente->remise, 0, ',', ' ') }} FCFA</td>
-                <td>
+                <td style="display:flex;flex-direction:row;justify-content:center;">
                     <a href="{{ route('ventes.show', $vente->id) }}" class="btn btn-info btn-sm">Détail</a>
-                </td>
-                <td>
-                    <a href="{{ route('ventes.annulerVente', $vente->id) }}" class="btn btn-danger btn-sm">Annuller</a>
+                    @can('Modifier / annuler vente')
+                    <form action="{{ route('ventes.annuler', $vente->id) }}" method="POST" onsubmit="return confirm('Confirmer l\'annulation de la vente ?')">
+                    @csrf
+                    <button type="submit" class="btn btn-danger btn-sm">Annuler</button>
+                    </form>
+                    @endcan
                 </td>
             </tr>
             @endforeach
@@ -78,4 +109,6 @@
         </div>
     </div>
 </div>
+
+
 @endsection
