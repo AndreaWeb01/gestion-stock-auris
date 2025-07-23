@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Detail_vente;
+use App\Models\Horaire;
 use App\Models\MouvementStock;
 use App\Models\Produit;
 use App\Models\User;
 use App\Models\Vente;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -57,10 +59,29 @@ class VenteController extends Controller
         $produits = Produit::all();
 
         return view('admin.ventes.create', compact('clients', 'utilisateurs', 'produits'));
+
     }
+    // private function estDansLesHoraires()
+    // {
+    //     $jour = strtolower(Carbon::now()->locale('fr_FR')->isoFormat('dddd')); // Ex: 'lundi'
+    //     $heureActuelle = Carbon::now()->format('H:i:s');
+
+    //     $horaire = Horaire::where('jour_semaine', $jour)->first();
+
+    //     if (!$horaire) {
+    //         return false; // Pas d’horaire défini pour ce jour
+    //     }
+
+    //     return $heureActuelle >= $horaire->heure_ouverture && $heureActuelle <= $horaire->heure_fermeture;
+    // }
+
+
 
 public function store(Request $request)
 {
+    //  if (!$this->estDansLesHoraires()) {
+    //     return redirect()->back()->with('error', 'Les ventes ne sont pas autorisées à cette heure.');
+    // }
 
     $request->validate([
         'client_id' => 'required|exists:clients,id',
@@ -68,7 +89,6 @@ public function store(Request $request)
         'remise' => 'nullable|numeric|min:0',
         'date_vente' => 'required|date',
         'mode_paiement' => 'required|string|max:50',
-         // Ajout de la validation pour le code reçu
     ]);
 
             $date = now();

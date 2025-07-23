@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExportationEcontroller;
+use App\Http\Controllers\HoraireController;
 use App\Http\Controllers\MouvementStockController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProduitController;
@@ -39,6 +40,12 @@ Route::middleware(['web', 'verified', 'auth'])->group(function () {
     Route::POST('/ventes/{vente}/annuler', [VenteController::class, 'annulerVente'])->name('ventes.annuler');
     Route::post('/simple-exel/expot', [ExportationEcontroller::class,'exportation'] )->name('export');
 });
+Route::middleware(['auth', 'is.admin'])->prefix('admin')->group(function () {
+    Route::get('/horaires', [HoraireController::class, 'index'])->name('admin.horaires.index');
+    Route::get('/horaires/edit', [HoraireController::class, 'edit'])->name('admin.horaires.edit');
+    Route::post('/horaires', [HoraireController::class, 'update'])->name('admin.horaires.update');
+});
+
 
 
 

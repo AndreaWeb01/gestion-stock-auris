@@ -1,6 +1,12 @@
 @extends('layouts.base')
 
 @section('content')
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 <div class="container">
     <h4>Nouvelle Vente</h4>
     <div class="card mb-3">
@@ -11,11 +17,6 @@
     <form class="needs-validation" novalidate method="POST" action="{{ route('ventes.store') }}">
         @csrf
 
-            @if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
 
         {{-- Client & utilisateur --}}
         <div class="row mb-3">

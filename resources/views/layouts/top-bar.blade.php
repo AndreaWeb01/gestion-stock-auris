@@ -235,9 +235,9 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="{{route('admin.horaires.index')}}" class="dropdown-item notify-item">
                                     <i data-lucide="settings" class="font-size-16 me-2"></i>
-                                    <span>parametre</span>
+                                    <span>parametre des horaire de ventes</span>
                                 </a>
 
                                 <!-- item-->
