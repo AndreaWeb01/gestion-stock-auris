@@ -3,23 +3,19 @@
 @section('title', 'Liste des produits')
 
 @section('content')
-<div class="row">
+<div class="row mt-5">
     <div class="col-12">
         <div class="card shadow-sm border-0">
-            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                <h4 class="mb-0">📦 Liste des Mouvement de Stock</h4>
-                <a href="{{ route('mouvementStocks.create') }}" class="btn btn-light btn-sm">
-                    ➕ Nouveau Mouvement de Stock
+            <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+                <h3 class="text-white m-0"><i class="fas fa-list me-2"></i>  Liste des mouvements de stock</h3>
+                <a href="{{ route('mouvementStocks.create') }}" class="btn btn-light text-info fw-bold shadow-sm">
+                    <i class="fas fa-plus me-1"></i> Nouveau mouvement de stock
                 </a>
             </div>
-
             <div class="card-body">
-                <p class="text-muted">
-                    L'extension <strong>Buttons</strong> pour <strong>DataTables</strong> fournit un ensemble d'options et de méthodes API pour interagir avec un tableau de manière stylée et dynamique.
-                </p>
-
+                <div class="table-responsive">
                 <table id="datatable-buttons" class="table table-hover table-bordered dt-responsive nowrap w-100">
-                    <thead class="table-light">
+                    <thead class="table-dark">
                         <tr>
                             <th>ID</th>
                             <th>Produit</th>
@@ -44,19 +40,18 @@
                             <td>{{ $mouvement->produit->stock_actuel }}</td>
                             <td>{{ $mouvement->motif }}</td>
                             <td>{{ \Carbon\Carbon::parse($mouvement->date_mouvement)->format('d/m/Y') }}</td>
-                            <td>
-                                <a href="{{ route('mouvementStocks.edit', $mouvement->id) }}" class="btn btn-sm btn-warning">
-                                    ✏️ Modifier
-                                </a>
-    <form id="delete-form-{{ $mouvement->id }}" action="{{ route('mouvementStocks.destroy', $mouvement->id) }}" method="POST" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="btn btn-sm btn-danger btn-delete" data-form-id="delete-form-{{ $mouvement->id }}">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-
-                                            </form>
-                            </td>
+                             <td>
+                                    <a href="{{ route('mouvementStocks.edit', $mouvement->id) }}" class="btn btn-lg btn-info">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form action="{{ route('mouvementStocks.destroy', $mouvement->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-lg btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
                         </tr>
                         @endforeach
                     </tbody>

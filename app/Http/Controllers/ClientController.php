@@ -11,13 +11,13 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::paginate(2);
-        return view('clients.index', compact('clients'));
+        return view('admin.clients.index', compact('clients'));
     }
 
 
     public function create()
     {
-        return view('clients.create');
+        return view('admin.clients.create');
     }
 
     public function store(Request $request)
@@ -41,7 +41,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        return view('clients.show', compact('client'));
+        return view('admin.clients.show', compact('client'));
     }
 
     /**
@@ -49,7 +49,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        return view('clients.edit', compact('client'));
+        return view('admin.clients.edit', compact('client'));
     }
 
     /**

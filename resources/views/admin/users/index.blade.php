@@ -1,18 +1,17 @@
 @extends('layouts.base')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+                <h3 class="text-white m-0"><i class="fas fa-list me-2"></i> Liste des utilisateurs</h3>
+                <a href="{{ route('users.create') }}" class="btn btn-light text-info fw-bold shadow-sm">
+                    <i class="fas fa-plus me-1"></i> Nouvel utilisateur
+                </a>
+            </div>
+            <div class="card-body">
 
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Liste des Utilisateurs</h3>
-                    <div class="card-tools">
-                        <a href="{{ route('users.create') }}" class="btn btn-primary">Ajouter un Utilisateur</a>
-                    </div>
-                </div>
-                <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -41,17 +40,19 @@
 
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->telephone }}</td>
-                                <td>
-                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-info">
-                                        <i class="fas fa-edit"></i> Modifier
+                                <td >
+                                    <div class="d-flex justify-content-center gap-3">
+                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-lg btn-info rounded-3">
+                                        <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline rounded-3">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">
-                                            <i class="fas fa-trash"></i> Supprimer
+                                        <button type="submit" class="btn btn-lg btn-danger rounded-3" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">
+                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
+                                </div>
                                 </td>
                             </tr>
                             @endforeach
@@ -61,5 +62,5 @@
             </div>
         </div>
     </div>
-</div>
+
 @endsection

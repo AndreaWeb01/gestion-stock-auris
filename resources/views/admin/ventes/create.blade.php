@@ -1,19 +1,18 @@
 @extends('layouts.base')
 
 @section('content')
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
 
-<div class="container">
-    <h4>Nouvelle Vente</h4>
-    <div class="card mb-3">
-        <div class="card-body">
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+                <h3 class="text-white m-0"><i class="fas fa-list me-2"></i> Liste des ventes</h3>
+                <a href="{{ route('ventes.create') }}" class="btn btn-light text-info fw-bold shadow-sm">
+                    <i class="fas fa-plus me-1"></i> Nouvelle vente
+                </a>
+            </div>
+            <div class="card-body">
             <p>Enregistrez une nouvelle vente en remplissant le formulaire ci-dessous.</p>
-
-
     <form class="needs-validation" novalidate method="POST" action="{{ route('ventes.store') }}">
         @csrf
 
@@ -182,5 +181,8 @@
 
     // Calcul initial
     recalculerTotals();
+
 </script>
+
+
 @endsection

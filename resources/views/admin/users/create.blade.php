@@ -1,10 +1,15 @@
 @extends('layouts.base')
 @section('content')
-<div class="container-fluid px-4">
-    <h1 class="mt-4">Modifier l'utilisateur</h1>
-    <div class="card mb-4">
-        <div class="card-body">
-
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+                <h3 class="text-white m-0"><i class="fas fa-add me-2"></i>  Creation un nouvel utilisateur</h3>
+                <a href="{{ route('users.index') }}" class="btn btn-light text-info fw-bold shadow-sm">
+                    <i class="fas fa-arrow-left me-1"></i> Retour
+                </a>
+            </div>
+            <div class="card-body">
             <form action="{{ route('users.store') }}" method="POST">
                 @csrf
 
@@ -31,10 +36,12 @@
                 <div class="mb-3">
                     <label for="telephone" class="form-label">Numéro de téléphone</label>
                     <input type="tel" class="form-control" id="telephone" name="telephone">
+                </div>
 
-                <button type="submit" class="btn btn-primary"> Creer</button>
+                <button type="submit" class="btn btn-info btn-lg px-5"><i class="fas fa-save me-2"></i> Créer</button>
 
             </form>
+        </div>
         </div>
     </div>
 </div>

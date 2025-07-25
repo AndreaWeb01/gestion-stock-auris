@@ -61,19 +61,28 @@ class VenteController extends Controller
         return view('admin.ventes.create', compact('clients', 'utilisateurs', 'produits'));
 
     }
-    // private function estDansLesHoraires()
-    // {
-    //     $jour = strtolower(Carbon::now()->locale('fr_FR')->isoFormat('dddd')); // Ex: 'lundi'
-    //     $heureActuelle = Carbon::now()->format('H:i:s');
+//     private function estDansLesHoraires()
+// {
+//     $maintenant = now();
+//     $jour = strtolower($maintenant->format('l')); // Exemple : "monday"
+//     $jourTraduit = [
+//         'monday' => 'lundi',
+//         'tuesday' => 'mardi',
+//         'wednesday' => 'mercredi',
+//         'thursday' => 'jeudi',
+//         'friday' => 'vendredi',
+//         'saturday' => 'samedi',
+//         'sunday' => 'dimanche',
+//     ][$jour];
 
-    //     $horaire = Horaire::where('jour_semaine', $jour)->first();
+//     $horaire = Horaire::where('jour_semaine', $jourTraduit)->first();
 
-    //     if (!$horaire) {
-    //         return false; // Pas d’horaire défini pour ce jour
-    //     }
+//     if (!$horaire) return false;
 
-    //     return $heureActuelle >= $horaire->heure_ouverture && $heureActuelle <= $horaire->heure_fermeture;
-    // }
+//     $heureActuelle = $maintenant->format('H:i:s');
+//     return ($heureActuelle >= $horaire->heure_ouverture && $heureActuelle <= $horaire->heure_fermeture);
+// }
+
 
 
 
@@ -132,7 +141,7 @@ public function store(Request $request)
             $stockActuel = $produitModel->mouvements()->where('type_mouvement', 'entree')->sum('quantite')
                 - $produitModel->mouvements()->where('type_mouvement', 'sortie')->sum('quantite');
             if ($produit['quantite'] > $stockActuel) {
-                return back()->with('error', 'Stock insuffisant pour le produit : ' . $produitModel->nom);
+                return redirect()->back()->with('error', 'Stock insuffisant pour le produit : ' . $produitModel->nom);
             }
         }
 

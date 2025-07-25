@@ -1,58 +1,62 @@
 @extends('layouts.base')
+
 @section('title', 'Modifier un client')
+
 @section('content')
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+                <h3 class="text-white m-0"><i class="fas fa-edit me-2"></i>  Modifier le client</h3>
 
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Modifier le client</h4>
-                </div>
+            </div>
 
-                <div class="card-body">
+
+                <div class="card-body p-4">
                     <form action="{{ route('clients.update', $client->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
-                        <div class="mb-3">
-                            <label for="nom" class="form-label">Nom</label>
-                            <input type="text" name="nom" id="nom" value="{{ old('nom', $client->nom) }}" class="form-control @error('nom') is-invalid @enderror" required>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="nom" id="nom" value="{{ old('nom', $client->nom) }}" class="form-control @error('nom') is-invalid @enderror" placeholder="Nom" required>
+                            <label for="nom">Nom</label>
                             @error('nom')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="prenom" class="form-label">Prénom</label>
-                            <input type="text" name="prenom" id="prenom" value="{{ old('prenom', $client->prenom) }}" class="form-control @error('prenom') is-invalid @enderror">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="prenom" id="prenom" value="{{ old('prenom', $client->prenom) }}" class="form-control @error('prenom') is-invalid @enderror" placeholder="Prénom">
+                            <label for="prenom">Prénom</label>
                             @error('prenom')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="telephone" class="form-label">Téléphone</label>
-                            <input type="text" name="telephone" id="telephone" value="{{ old('telephone', $client->telephone) }}" class="form-control @error('telephone') is-invalid @enderror" required>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="telephone" id="telephone" value="{{ old('telephone', $client->telephone) }}" class="form-control @error('telephone') is-invalid @enderror" placeholder="Téléphone" required>
+                            <label for="telephone">Téléphone</label>
                             @error('telephone')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="adresse" class="form-label">Adresse</label>
-                            <input type="text" name="adresse" id="adresse" value="{{ old('adresse', $client->adresse) }}" class="form-control @error('adresse') is-invalid @enderror">
+                        <div class="form-floating mb-4">
+                            <input type="text" name="adresse" id="adresse" value="{{ old('adresse', $client->adresse) }}" class="form-control @error('adresse') is-invalid @enderror" placeholder="Adresse">
+                            <label for="adresse">Adresse</label>
                             @error('adresse')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100">Mettre à jour</button>
+                        <button type="submit" class="btn btn-info w-100 py-2 shadow-sm">
+                            <i class="bi bi-check-circle me-2"></i>Mettre à jour
+                        </button>
                     </form>
                 </div>
             </div>
 
         </div>
     </div>
-</div>
+
 @endsection

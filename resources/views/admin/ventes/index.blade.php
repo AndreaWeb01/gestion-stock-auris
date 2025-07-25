@@ -1,16 +1,16 @@
 @extends('layouts.base')
 @section('content')
-<div class="container">
-    <div class="card mb-3">
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                <h4 class="mb-0">📦 Liste des ventes</h4>
-                <a href="{{ route('ventes.create') }}" class="btn btn-light btn-sm">
-                    ➕Nouvelle vente
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+                <h3 class="text-white m-0"><i class="fas fa-list me-2"></i> Liste des ventes</h3>
+                <a href="{{ route('ventes.create') }}" class="btn btn-light text-info fw-bold shadow-sm">
+                    <i class="fas fa-plus me-1"></i> Nouvelle vente
                 </a>
             </div>
-        <div class="card-body">
-            <p>Consultez l'historique des ventes effectuées.</p>
-
+            <div class="card-body">
+                
 
     <form method="GET" action="" class="mb-3">
         <div class="row">

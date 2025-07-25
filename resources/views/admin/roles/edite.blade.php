@@ -3,19 +3,23 @@
 @section('title', 'Modifier un rôle')
 
 @section('content')
-<div class="container mt-4">
-    <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-            <h2 class="mb-0">Modifier le rôle</h2>
-        </div>
-        <div class="card-body">
-            <form action="{{ route('roles.update', $role->id) }}" method="POST">
-                @csrf
-                @method('PUT')
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                <h2 class="text-white mb-0">Modifier le rôle</h2>
+                <a href="{{ route('roles.index') }}" class="btn btn-light text-info fw-bold shadow-sm">
+                    <i class="fas fa-arrow-left me-1"></i> Retour
+                </a>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('roles.update', $role->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
 
-                <div class="mb-4">
-                    <label for="name" class="form-label fw-bold">Nom du rôle</label>
-                    <input type="text" name="name" class="form-control form-control-lg border-primary" value="{{ $role->name }}" required>
+                    <div class="mb-4">
+                        <label for="name" class="form-label fw-bold">Nom du rôle</label>
+                    <input type="text" name="name" class="form-control form-control-lg border-info" value="{{ $role->name }}" required>
                 </div>
 
                 <div class="mb-4">
@@ -24,12 +28,12 @@
                         @foreach($permissions as $permission)
                             <div class="col-md-4">
                                 <div class="form-check custom-checkbox">
-                                    <input class="form-check-input border-primary" type="checkbox"
+                                    <input class="form-check-input border-info" type="checkbox"
                                            name="permissions[]"
                                            value="{{ $permission->name }}"
                                            id="perm-{{ $permission->id }}"
                                            {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }}>
-                                    <label class="form-check-label text-secondary" for="perm-{{ $permission->id }}">
+                                    <label class="form-check-label text-black" for="perm-{{ $permission->id }}">
                                         {{ $permission->name }}
                                     </label>
                                 </div>
@@ -39,11 +43,12 @@
                 </div>
 
                 <div class="text-end">
-                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                    <button type="submit" class="btn btn-info btn-lg px-5">
                         <i class="fas fa-save me-2"></i>Enregistrer les modifications
                     </button>
                 </div>
             </form>
+        </div>
         </div>
     </div>
 </div>

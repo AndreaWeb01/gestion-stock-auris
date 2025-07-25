@@ -65,20 +65,20 @@ class MouvementStockController extends Controller
     /**
      * Affiche un mouvement de stock spécifique.
      */
-    public function show(MouvementStock $mouvementStock)
+    public function show( $id)
     {
+        $mouvementStock = MouvementStock::find($id);
         return view('admin.stocks.show', compact('mouvementStock'));
     }
 
-    /**
-     * Affiche le formulaire d'édition d'un mouvement de stock existant.
-     */
-    public function edit(MouvementStock $mouvementStock)
-    {
-        $produits = Produit::all();
-        $users = User::all(); // Récupère tous les utilisateurs pour le champ
-        return view('admin.stocks.edit', compact('mouvementStock','produits', 'users'));
-    }
+   public function edit(MouvementStock $mouvementStock)
+        {
+            $produits = Produit::all();
+            $users = User::all();
+
+            return view('admin.stocks.edit', compact('mouvementStock', 'produits', 'users'));
+        }
+
 
     /**
      * Met à jour un mouvement de stock existant en base de données.

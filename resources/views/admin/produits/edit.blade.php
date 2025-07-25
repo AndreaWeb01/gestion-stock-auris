@@ -2,32 +2,16 @@
 
 @section('content')
 
-<div class="container-fluid">
-
-    <!-- start page title -->
-    <div class="py-3 py-lg-4">
-        <div class="row">
-            <div class="col-lg-6">
-                <h4 class="page-title mb-0">Modifier un produit</h4>
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+                <h3 class="text-white m-0"><i class="fas fa-edit me-2"></i>  Modifier Produit</h3>
+                <a href="{{ route('produits.index') }}" class="btn btn-light text-info fw-bold shadow-sm">
+                    <i class="fas fa-arrow-left me-1"></i> Retour à la liste
+                </a>
             </div>
-            <div class="col-lg-6">
-                <div class="d-none d-lg-block">
-                    <ol class="breadcrumb m-0 float-end">
-                        <li class="breadcrumb-item"><a href="{{ route('produits.index') }}">Produits</a></li>
-                        <li class="breadcrumb-item active">Modifier</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end page title -->
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Modifier Produit</h4>
-                    <p class="sub-header">Modifiez les informations du produit ci-dessous.</p>
+        <div class="card-body">
 
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -70,9 +54,6 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
     </div>
-    <!-- end row -->
-
-</div>
 
 <a href="{{ route('produits.index') }}">Retour à la liste des produits</a>
 @endsection

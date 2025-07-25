@@ -2,31 +2,17 @@
 
 @section('content')
 
-<div class="container-fluid">
 
-    <!-- start page title -->
-    <div class="py-3 py-lg-4">
-        <div class="row">
-            <div class="col-lg-6">
-                <h4 class="page-title mb-0">Créer un produit</h4>
-            </div>
-            <div class="col-lg-6">
-                <div class="d-none d-lg-block">
-                    <ol class="breadcrumb m-0 float-end">
-                        <li class="breadcrumb-item"><a href="{{ route('produits.index') }}">Produits</a></li>
-                        <li class="breadcrumb-item active">Créer</li>
-                    </ol>
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+                    <h3 class="header-title text-white"><i class="fas fa-plus me-2"></i>Nouveau Produit</h3>
+                     <a href="{{ route('produits.index') }}" class="btn btn-light text-info fw-bold shadow-sm">
+                    <i class="fas fa-arrow-left me-1"></i> Retour
+                </a>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- end page title -->
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Nouveau Produit</h4>
                     <p class="sub-header">Remplissez le formulaire pour ajouter un nouveau produit.</p>
 
                     @if ($errors->any())
@@ -62,18 +48,13 @@
                                 Veuillez saisir un seuil d'alerte valide.
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Créer le produit</button>
+                        <button class="btn btn-info" type="submit">Créer le produit</button>
                     </form>
-
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col-->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- end row -->
 
-</div>
-
-    <a href="{{ route('produits.index') }}">Retour à la liste des produits</a>
     @endsection
 
 </body>

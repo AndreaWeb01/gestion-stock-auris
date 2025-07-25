@@ -3,23 +3,15 @@
 @section('title', 'Roles Management')
 
 @section('content')
-<div class="container-fluid px-4">
-    <h1 class="mt-4">Gestion des rôles</h1>
-
-    <div class="card mb-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <div>
-                <i class="fas fa-user-shield me-1"></i>
-                Liste des rôles
-            </div>
-
-            @can('create-role')
-                <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">
-                    <i class="fas fa-plus"></i> Nouveau rôle
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+                <h3 class="text-white m-0"><i class="fas fa-list me-2"></i>  Liste des rôles</h3>
+                <a href="{{ route('roles.create') }}" class="btn btn-light text-info fw-bold shadow-sm">
+                    <i class="fas fa-plus me-1"></i> Nouveau rôle
                 </a>
-            @endcan
-        </div>
-
+            </div>
         <div class="card-body">
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">{{ $message }}</div>
@@ -29,7 +21,7 @@
                 <table class="table table-bordered table-striped" id="rolesTable">
                     <thead class="table-dark">
                         <tr>
-                            <th>#</th>
+                            <th>N</th>
                             <th>Nom</th>
                             <th>Permissions</th>
                             <th>Actions</th>
@@ -46,24 +38,24 @@
                                 @endforeach
                             </td>
                             <td>
-                                <div class="d-flex gap-2 flex-wrap">
+                                <div class="d-flex gap-2">
 
-                                        <a href="{{ route('roles.show', $role->id) }}" class="btn btn-info btn-sm" title="Voir">
+                                        <a href="{{ route('roles.show', $role->id) }}" class="btn btn-info btn-lg rounded-3" title="Voir">
                                             <i class="fas fa-eye"></i>
                                         </a>
 
 
 
-                                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary btn-sm" title="Modifier">
+                                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary btn-lg rounded-3" title="Modifier">
                                             <i class="fas fa-edit"></i>
                                         </a>
 
 
 
-                                        <form action="{{ route('roles.destroy', $role->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce rôle ?')" class="d-inline">
+                                        <form action="{{ route('roles.destroy', $role->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce rôle ?')" class="d-inline rounded-3">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" title="Supprimer">
+                                            <button type="submit" class="btn btn-danger btn-lg rounded-3" title="Supprimer">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
@@ -77,7 +69,9 @@
             </div>
         </div>
     </div>
+    </div>
 </div>
+
 @endsection
 
 @push('scripts')
