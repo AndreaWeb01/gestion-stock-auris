@@ -10,7 +10,7 @@
                 </a>
             </div>
             <div class="card-body">
-                
+
 
     <form method="GET" action="" class="mb-3">
         <div class="row">
@@ -93,7 +93,7 @@
                 <td>{{ number_format($vente->montant_total, 0, ',', ' ') }} FCFA</td>
                 <td>{{ number_format($vente->remise, 0, ',', ' ') }} FCFA</td>
                 <td style="display:flex;flex-direction:row;justify-content:center;">
-                    <a href="{{ route('ventes.show', $vente->id) }}" class="btn btn-info btn-sm">Détail</a>
+                    {{-- <a href="{{ route('ventes.show', $vente->id) }}" class="btn btn-info btn-sm">Détail</a> --}}
                     @can('Modifier / annuler vente')
                     <form action="{{ route('ventes.annuler', $vente->id) }}" method="POST" onsubmit="return confirm('Confirmer l\'annulation de la vente ?')">
                     @csrf

@@ -24,7 +24,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('ventes', VenteController::class)->only('create','store','index','show');
+
+
+
+    Route::get('/ventes/{vente}',[VenteController::class,'show'])->name('ventes.show');
     Route::post('/simple-exel/expot', [ExportationEcontroller::class,'exportation'] )->name('export');
     Route::get('clients', [ClientController::class, 'index'])->name('clients.index');
     Route::post('clients', [ClientController::class, 'store'])->name('clients.store');
@@ -33,6 +36,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('produits', [ProduitController::class, 'index'])->name('produits.index');
     Route::get('mouvementStocks', [MouvementStockController::class, 'index'])->name('mouvementStocks.index');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+   // Routes des ventes
+Route::get('/ventes', [VenteController::class, 'index'])->name('ventes.index'); // Affichage liste
+Route::get('/ventes/create', [VenteController::class, 'create'])->name('ventes.create')->middleware('verifier.heure.vente'); // Formulaire création
+Route::post('/ventes', [VenteController::class, 'store'])->name('ventes.store')->middleware('verifier.heure.vente'); // Enregistrement vente
 });
 
 Route::middleware(['web', 'verified', 'auth','is.admin'])->group(function () {
