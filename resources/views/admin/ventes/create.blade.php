@@ -1,4 +1,5 @@
 @extends('layouts.base')
+@section('title', 'Créer une vente')
 
 @section('content')
 

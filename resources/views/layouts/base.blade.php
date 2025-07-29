@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard | Drezoc - Responsive Bootstrap 5 Admin Dashboard</title>
+    <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Drezoc - Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="MyraStudio" name="author" />
@@ -20,17 +20,21 @@
     <script src="{{url('assets/js/config.js')}}"></script>
     <link rel="shortcut icon" href="{{url('assets/images/favicon.ico')}} ">
 
-        <!-- third party css -->
-        <link href="{{url('assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{url('assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{url('assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{url('assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-        <!-- third party css end -->
+    <!-- third party css -->
+    <link href="{{url('assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet"
+        type="text/css" />
+    <link href="{{url('assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet"
+        type="text/css" />
+    <link href="{{url('assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet"
+        type="text/css" />
+    <link href="{{url('assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet"
+        type="text/css" />
+    <!-- third party css end -->
 
-		<!-- App css -->
-		<link href="{{url('assets/css/style.min.css')}}" rel="stylesheet" type="text/css">
-		<link href="{{url('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
-		<script src="{{url('assets/js/config.js')}}"></script>
+    <!-- App css -->
+    <link href="{{url('assets/css/style.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
+    <script src="{{url('assets/js/config.js')}}"></script>
 
 
 
@@ -40,81 +44,73 @@
 
     <div class="layout-wrapper">
 
-        <div>@include('layouts.sidebar')</div>
+        @include('layouts.sidebar')
+
         <div class="page-content">
-
-            <!-- ========== Topbar Start ========== -->
-
-            <!-- ========== Topbar End ========== -->
-
             <div class="px-3">
-
                 <!-- Start Content-->
                 <div class="container-fluid">
-                     <div>
-                         @include('layouts.top-bar')
+                    <div>
+                        @include('layouts.top-bar')
                     </div>
 
-                    <!-- start page title -->
-
-
-             @yield('content')
-             @stack('scripts')
-
-
-         </div>
+                    @yield('content')
+                    @stack('scripts')
+                </div>
+            </div>
+        </div>
     </div>
-        </div> <!-- end container-fluid-->
-          <!-- Footer Start -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div><script>document.write(new Date().getFullYear())</script> © Drezoc</div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="d-none d-md-flex gap-4 align-item-center justify-content-md-end">
-                                <p class="mb-0">Design & Develop by <a href="https://myrathemes.com/" target="_blank">MyraStudio</a> </p>
-                            </div>
-                        </div>
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <script>document.write(new Date().getFullYear())</script> © Drezoc
                     </div>
                 </div>
-            </footer>
+                <div class="col-md-6">
+                    <div class="d-none d-md-flex gap-4 align-item-center justify-content-md-end">
+                        <p class="mb-0">Design & Develop by <a href="https://myrathemes.com/"
+                                target="_blank">MyraStudio</a> </p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </footer>
 
-        <!-- ============================================================== -->
-        <!-- End Page content -->
-        <!-- ============================================================== -->
 
-    </div>
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
     <!-- END wrapper -->
 
     <!-- App js -->
     <script src="{{url('assets/js/vendor.min.js')}}"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $('.btn-delete').on('click', function () {
-            const formId = $(this).data('form-id');
+    <script>
+        $(document).ready(function () {
+            $('.btn-delete').on('click', function () {
+                const formId = $(this).data('form-id');
 
-            Swal.fire({
-                title: 'Êtes-vous sûr ?',
-                text: "Cette action est irréversible !",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Oui, supprimer !',
-                cancelButtonText: 'Annuler'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $('#' + formId).submit();
-                }
+                Swal.fire({
+                    title: 'Êtes-vous sûr ?',
+                    text: "Cette action est irréversible !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Oui, supprimer !',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#' + formId).submit();
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
 
 
 
@@ -136,36 +132,36 @@
     <script src="{{url('assets/js/pages/dashboard.js')}}"></script>
 
     <script src="{{url('assets/js/vendor.min.js')}}"></script>
-        <script src="{{url('assets/js/app.js')}}"></script>
+    <script src="{{url('assets/js/app.js')}}"></script>
 
-        <!-- third party js -->
-        <script src="{{url('assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-        <script src="{{url('assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js')}}"></script>
-        <script src="{{url('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
-        <script src="{{url('assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js')}}"></script>
-        <script src="{{url('assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
-        <script src="{{url('assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js')}}"></script>
-        <script src="{{url('assets/libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-        <script src="{{url('assets/libs/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
-        <script src="{{url('assets/libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
-        <script src="{{url('assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
-        <script src="{{url('assets/libs/datatables.net-select/js/dataTables.select.min.js')}}"></script>
-        <script src="{{url('assets/libs/pdfmake/build/pdfmake.min.js')}}"></script>
-        <script src="{{url('assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
-        <!-- third party js ends -->
+    <!-- third party js -->
+    <script src="{{url('assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url('assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js')}}"></script>
+    <script src="{{url('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{url('assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js')}}"></script>
+    <script src="{{url('assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{url('assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js')}}"></script>
+    <script src="{{url('assets/libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{url('assets/libs/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+    <script src="{{url('assets/libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{url('assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
+    <script src="{{url('assets/libs/datatables.net-select/js/dataTables.select.min.js')}}"></script>
+    <script src="{{url('assets/libs/pdfmake/build/pdfmake.min.js')}}"></script>
+    <script src="{{url('assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
+    <!-- third party js ends -->
 
-        <!-- Datatables js -->
-        <script src="{{url('assets/js/pages/datatables.js')}}"></script>
-        <!-- jQuery (si non déjà inclus) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Datatables js -->
+    <script src="{{url('assets/js/pages/datatables.js')}}"></script>
+    <!-- jQuery (si non déjà inclus) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Popper.js -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        @yield('scripts')
+    @yield('scripts')
 
 </body>
 

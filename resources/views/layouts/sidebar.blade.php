@@ -1,4 +1,4 @@
- <!-- ========== Left Sidebar ========== -->
+
         <div class="main-menu">
             <!-- Brand Logo -->
             <div class="logo-box">
