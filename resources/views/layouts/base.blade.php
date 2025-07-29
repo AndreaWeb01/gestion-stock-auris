@@ -63,23 +63,8 @@
 
 
          </div>
-    </div><h3>Exporter</h3>
-<p>Exporter la table "clients" en Excel</p>
-
-<form method="POST" action="{{ route('export') }}" >
-
-    @csrf
-
-    <input type="text" name="name" placeholder="Nom de fichier" >
-
-    <select name="extension" >
-        <option value="xlsx" >.xlsx</option>
-        <option value="csv" >.csv</option>
-    </select>
-
-    <button type="submit" >Exporter</button>
-
-</form>
+    </div>
+        </div> <!-- end container-fluid-->
           <!-- Footer Start -->
             <footer class="footer">
                 <div class="container-fluid">
@@ -130,6 +115,7 @@
         });
     });
 </script>
+
 
 
 

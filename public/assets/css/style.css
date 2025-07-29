@@ -41,7 +41,7 @@ html[data-bs-theme=dark] {
 }
 
 [data-menu-color=dark] {
-  --bs-menu-bg: #17263a;
+  --bs-menu-bg: #02228b;
   --bs-menu-item-color: #9097a7;
   --bs-menu-item-hover-color: #c8cddc;
   --bs-menu-item-active-color: #ffffff;
@@ -49,7 +49,7 @@ html[data-bs-theme=dark] {
 
 [data-menu-color=dark][data-bs-theme=dark],
 [data-bs-theme=dark][data-menu-color=light] {
-  --bs-menu-bg: #22262b;
+  --bs-menu-bg: #02228b;
   --bs-menu-item-color: #9097a7;
   --bs-menu-item-hover-color: #c8cddc;
   --bs-menu-item-active-color: #ffffff;
@@ -14582,7 +14582,7 @@ html[data-bs-theme=dark] #light-dark-mode .bx-moon::before {
   min-width: var(--bs-sidebar-width);
   -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
-  background: var(--bs-menu-bg);
+  background-color: #02228b;
   -webkit-box-shadow: var(--bs-box-shadow);
           box-shadow: var(--bs-box-shadow);
 }
@@ -19034,10 +19034,10 @@ span.flatpickr-weekday,
 
 /*!
  * Waves v0.7.6
- * http://fian.my.id/Waves 
- * 
- * Copyright 2014-2018 Alfiana E. Sibuea and other contributors 
- * Released under the MIT license 
+ * http://fian.my.id/Waves
+ *
+ * Copyright 2014-2018 Alfiana E. Sibuea and other contributors
+ * Released under the MIT license
  * https://github.com/fians/Waves/blob/master/LICENSE */
 .waves-effect {
   position: relative;

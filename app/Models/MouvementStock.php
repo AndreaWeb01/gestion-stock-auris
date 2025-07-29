@@ -6,15 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class MouvementStock extends Model
 {
-    protected $primaryKey = 'id_mouvement_stock';
+     protected $table = 'mouvement_stocks';
+
+    // Supprime ceci si tu l’avais défini :
+    // protected $primaryKey = 'id_mouvement_stock';
 
     protected $fillable = [
         'produit_id',
         'user_id',
+        'vente_id',
         'quantite',
-        'motif',
         'type_mouvement',
         'date_mouvement',
+        'motif',
     ];
 
     public function produit()
@@ -31,7 +35,7 @@ class MouvementStock extends Model
 
 
 
-    
+
 
 
 

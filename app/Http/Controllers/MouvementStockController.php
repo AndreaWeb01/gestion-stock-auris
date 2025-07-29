@@ -71,13 +71,13 @@ class MouvementStockController extends Controller
         return view('admin.stocks.show', compact('mouvementStock'));
     }
 
-   public function edit(MouvementStock $mouvementStock)
-        {
-            $produits = Produit::all();
-            $users = User::all();
+public function edit(MouvementStock $mouvementStock)
+{
+    $produits = Produit::all();
+    $users = User::all();
 
-            return view('admin.stocks.edit', compact('mouvementStock', 'produits', 'users'));
-        }
+    return view('admin.stocks.edit', compact('mouvementStock', 'produits', 'users'));
+}
 
 
     /**
@@ -97,7 +97,7 @@ class MouvementStockController extends Controller
 
         $mouvementStock->update($request->all());
 
-        return redirect()->route('admin.mouvements.index')->with('success', 'Mouvement de stock mis à jour avec succès.');
+        return redirect()->route('mouvementStocks.index')->with('success', 'Mouvement de stock mis à jour avec succès.');
     }
 
     /**
