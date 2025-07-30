@@ -27,7 +27,7 @@ class VenteController extends Controller
         if ($request->periode && $request->date_debut && $request->date_fin) {
             $dateDebut = $request->date_debut;
             $dateFin = $request->date_fin;
-            $ventes = $ventes->whereBetween('date_vente', [$dateDebut, $dateFin]);
+            $ventes = $ventes->whereBetween('created_at', [$dateDebut, $dateFin]);
         }
 
         // Recherche textuelle
@@ -48,7 +48,7 @@ class VenteController extends Controller
             });
         }
 
-        $ventes = $ventes->orderByDesc('date_vente')->paginate(15);
+        $ventes = $ventes->orderByDesc('created_at')->paginate(15);
         return view('admin.ventes.index', compact('ventes'));
     }
 
@@ -61,27 +61,7 @@ class VenteController extends Controller
         return view('admin.ventes.create', compact('clients', 'utilisateurs', 'produits'));
 
     }
-//     private function estDansLesHoraires()
-// {
-//     $maintenant = now();
-//     $jour = strtolower($maintenant->format('l')); // Exemple : "monday"
-//     $jourTraduit = [
-//         'monday' => 'lundi',
-//         'tuesday' => 'mardi',
-//         'wednesday' => 'mercredi',
-//         'thursday' => 'jeudi',
-//         'friday' => 'vendredi',
-//         'saturday' => 'samedi',
-//         'sunday' => 'dimanche',
-//     ][$jour];
 
-//     $horaire = Horaire::where('jour_semaine', $jourTraduit)->first();
-
-//     if (!$horaire) return false;
-
-//     $heureActuelle = $maintenant->format('H:i:s');
-//     return ($heureActuelle >= $horaire->heure_ouverture && $heureActuelle <= $horaire->heure_fermeture);
-// }
 
 
 

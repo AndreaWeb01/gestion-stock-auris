@@ -15,7 +15,11 @@ class DashboardController extends Controller
     public function index()
     {
 
-    $chartData1 = DB::table('ventes')
+
+
+        // Récupérer les données pour le graphique des ventes par mois
+
+    $chartData1 = DB::table('ventes')->where('statut', 'valide')
         ->select(
             DB::raw("strftime('%m', date_vente) as mois"),
             DB::raw("SUM(montant_total) as total")
@@ -32,11 +36,6 @@ class DashboardController extends Controller
         $data[] = (int) $row->total;
     }
 
-    // Vérifier si l'utilisateur est authentifié
-    if (!Auth::check()) {
-            return redirect('/'); // Rediriger vers la page de connexion si non authentifié
-        }
-
     // Récupérer l'utilisateur actuellement authentifié
     $user = Auth::user();
 
@@ -47,7 +46,7 @@ class DashboardController extends Controller
         $driver = DB::getDriverName();
 
         // Récupérer les 5 dernières ventes (par date de création décroissante)
-        $derniersVentes = Vente::orderBy('created_at', 'desc')->take(5)->get();
+        $derniersVentes = Vente::where('statut', 'valide')->orderBy('created_at', 'desc')->take(5)->get();
 
         // Définir l'expression de format de date selon le driver utilisé
         $dateExpression = $driver === 'sqlite'
@@ -82,16 +81,16 @@ class DashboardController extends Controller
         $ca_journalier = DB::table('ventes')->whereDate('created_at', Carbon::today())->sum('montant_total');
 
         // Calculer le chiffre d'affaires du mois en cours
-        $chiffreAffaireMoisEnCours = DB::table('ventes')
+        $chiffreAffaireMoisEnCours = DB::table('ventes')->where('statut', 'valide')
             ->whereYear('created_at', Carbon::now()->year)
             ->whereMonth('created_at', Carbon::now()->month)
             ->sum('montant_total');
 
         // Calculer le chiffre d'affaires total
-        $chiffreAffaires = Vente::sum('montant_total');
+        $chiffreAffaires = Vente::where('statut', 'valide')->sum('montant_total');
 
         // Compter le nombre total de ventes
-        $nombreVentes = Vente::count();
+        $nombreVentes = Vente::where('statut', 'valide')->count();
 
         // Récupérer le chiffre d'affaires groupé par mois
         $chiffreAffaireParMois = DB::table('ventes')

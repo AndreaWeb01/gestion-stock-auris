@@ -11,7 +11,7 @@ use Spatie\Permission\Models\Role;
 class UserContoller extends Controller
 {    public function index()
     {
-        $users = User::all();
+        $users = User::orderByDesc('created_at')->paginate(15);
         $roles=Role::all();
         return view('admin.users.index', compact('users','roles'));
     }

@@ -9,7 +9,7 @@
                     </div>
 
                 </div>
-            </div>
+
 
             <div class="row mt-3">
                 <div class="col-lg-6 col-xl-3">
@@ -20,9 +20,7 @@
                                     <h5 class="text-uppercase font-size-12 text-muted mb-3">Chiffre d'Affaires</h5>
                                     <span class="h3 mb-0">{{ (number_format($chiffreAffaires, 0, ',', ' ')) }} Fr</span>
                                 </div>
-                                <div class="col-auto">
-                                    <span class="badge badge-soft-success">+7.5%</span>
-                                </div>
+
                             </div> <!-- end row -->
 
                             <div id="sparkline1" class="mt-3"></div>
@@ -38,9 +36,6 @@
                                     <h6 class="text-uppercase font-size-12 text-muted mb-3">CA du mois en cours</h6>
                                     <span class="h3 mb-0">{{ number_format($chiffreAffaireMoisEnCours, 0, ',', ' ') }}
                                     </span>
-                                </div>
-                                <div class="col-auto">
-                                    <span class="badge badge-soft-danger">-24.5%</span>
                                 </div>
                             </div> <!-- end row -->
 
@@ -73,11 +68,8 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase font-size-12 text-muted mb-3">Daily Visits</h6>
-                                    <span class="h3 mb-0"> 1,12,584 </span>
-                                </div>
-                                <div class="col-auto">
-                                    <span class="badge badge-soft-success">+53.5%</span>
+                                    <h6 class="text-uppercase font-size-12 text-muted mb-3">TOTAL VENTES REALISEES</h6>
+                                    <span class="h3 mb-0">{{ number_format($nombreVentes, 0, ',', ' ') }}</span>
                                 </div>
                             </div> <!-- end row -->
 
@@ -188,9 +180,6 @@
                             </div>
                         </div>
                     </div>
-                </div> <!-- end row-->
-            </div> <!-- end container-fluid-->
-        <!-- end px-3 -->
 
 
 
