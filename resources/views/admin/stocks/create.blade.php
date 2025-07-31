@@ -11,7 +11,6 @@
                 </a>
             </div>
              <div class="card-body">
-
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -37,16 +36,6 @@
                 @endforeach
             </select>
         </div>
-        {{-- <div class="mb-3">
-            <label>Utilisateur</label>
-            <select name="user_id" class="form-control" required>
-                <option value="">-- Choisir un utilisateur --</option>
-                @foreach($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->nom }}</option>
-                @endforeach
-            </select>
-
-        </div> --}}
 
         <div class="mb-3">
             <label>Type de mouvement</label>

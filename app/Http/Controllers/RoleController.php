@@ -34,7 +34,7 @@ class RoleController extends Controller
 {
     $request->validate([
         'name' => 'required|unique:roles,name',
- // les permissions doivent être un tableau
+        'permissions' => 'array|required', // les permissions doivent être un tableau
     ]);
 
     // 1. Créer le rôle avec guard_name
@@ -54,7 +54,9 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        // Afficher les détails du rôle avec ses permissions
+        $role->load('permissions');
+        return view('admin.roles.show', compact('role', ));
     }
 
     /**
@@ -73,6 +75,7 @@ class RoleController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:roles,name,' . $role->id,
+            'permissions' => 'array|required', // les permissions doivent être un tableau
 
         ]);
 

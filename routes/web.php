@@ -127,6 +127,7 @@ Route::middleware(['web', 'verified', 'auth', 'is.admin'])->group(function () {
     // Route::get('/horaires/edit', [HoraireController::class, 'edit'])->name('admin.horaires.edit');
     // Route::post('/horaires', [HoraireController::class, 'update'])->name('admin.horaires.update');
 });
+Route::resource('users', UserContoller::class);
 
 // Auth routes (login, register, etc.)
 require __DIR__.'/auth.php';

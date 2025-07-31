@@ -18,7 +18,8 @@ class UserContoller extends Controller
 
     public function create()
     {
-        return view('admin.users.create');
+        $roles = Role::all();
+        return view('admin.users.create', compact('roles'));
     }
 
     public function store(Request $request)
@@ -40,8 +41,7 @@ class UserContoller extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'telephone'=>$request->telephone,
-
-        ]);
+        ])->assignRole($request->role); // Assigner le rôle sélectionné
 
         return redirect()->route('users.index')->with('success', 'Utilisateur ajouté.');
     }
@@ -84,6 +84,10 @@ public function update(Request $request, User $user)
 
     return redirect()->route('users.index')->with('success', 'Utilisateur modifié.');
 }
+public function show(User $user)
+    {
+        return view('admin.users.show', compact('user'));
+    }
 
 
 

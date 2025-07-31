@@ -3,7 +3,7 @@
 <div class="row mt-5">
     <div class="col-12">
         <div class="card shadow-sm border-0">
-            <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+            <div class="card-header card-heade d-flex justify-content-between align-items-center">
                 <h3 class="text-white m-0"><i class="fas fa-add me-2"></i>  Creation un nouvel utilisateur</h3>
                 <a href="{{ route('users.index') }}" class="btn btn-light text-info fw-bold shadow-sm">
                     <i class="fas fa-arrow-left me-1"></i> Retour
@@ -30,15 +30,25 @@
 
                 <div class="mb-3">
                     <label for="password" class="form-label">Mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Laisser vide pour garder le mot de passe actuel">
+                    <input type="password" class="form-control" id="password" name="password" >
                 </div>
 
                 <div class="mb-3">
                     <label for="telephone" class="form-label">Numéro de téléphone</label>
                     <input type="tel" class="form-control" id="telephone" name="telephone">
                 </div>
+                <div class="mb-3">
+                    <label for="role" class="form-label">Rôle</label>
+                    <select class="form-select" id="role" name="role">
+                        @foreach($roles as $role)
+                            <option value="{{ $role->name }}" {{ old('role') == $role->name ? 'selected' : '' }}>
+                                {{ $role->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-                <button type="submit" class="btn btn-info btn-lg px-5"><i class="fas fa-save me-2"></i> Créer</button>
+                <button type="submit" class="btn btn-info btn-sm px-5"><i class="fas fa-save me-2"></i> Créer</button>
 
             </form>
         </div>
