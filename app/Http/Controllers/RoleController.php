@@ -34,7 +34,7 @@ class RoleController extends Controller
 {
     $request->validate([
         'name' => 'required|unique:roles,name',
-        'permissions' => 'array|required', // les permissions doivent être un tableau
+ // les permissions doivent être un tableau
     ]);
 
     // 1. Créer le rôle avec guard_name
@@ -73,7 +73,7 @@ class RoleController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:roles,name,' . $role->id,
-            'permissions' => 'array|required',
+
         ]);
 
         $role->update([
@@ -90,6 +90,14 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        // Vérifier si le rôle est utilisé par des utilisateurs
+        if ($role->users()->count() > 0) {
+            return redirect()->route('roles.index')->with('error', 'Impossible de supprimer ce rôle car il est attribué à des utilisateurs.');
+        }
+
+        // Supprimer le rôle
+        $role->delete();
+
+        return redirect()->route('roles.index')->with('success', 'Rôle supprimé avec succès');
     }
 }
