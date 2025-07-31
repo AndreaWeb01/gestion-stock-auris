@@ -14,15 +14,10 @@ class ExportationEcontroller extends Controller
 
     public function exportation(Request $request): StreamedResponse
     {
-        $request->validate([
-            'name' => 'required|string',
-            'extension' => 'required|string|in:xlsx',
-        ]);
 
-        $filename = $request->name . '.' . $request->extension;
-
+        $filename = "Liste des ventes.xlsx";
         // 1. Récupération des données
-        $ventes = vente::select('code_recu', 'remise', 'mode_paiement', 'montant_total')->get();
+        $ventes = Vente::where('statut', 'valide')->select('code_recu', 'remise', 'mode_paiement', 'montant_total')->get();
 
         // 2. Création du spreadsheet
         $spreadsheet = new Spreadsheet();

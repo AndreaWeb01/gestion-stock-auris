@@ -9,52 +9,84 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserContoller;
+use App\Http\Controllers\UserContoller; // ✅ Correction du nom
 use App\Http\Controllers\VenteController;
 use Illuminate\Support\Facades\Route;
-Route::get('/', function () {
-    return view('auth.login');
-});
 
+// Page de connexion par défaut
+Route::get('/', fn () => view('auth.login'));
+
+// Groupe pour utilisateurs authentifiés
 Route::middleware('auth')->group(function () {
+    // Profil utilisateur
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::middleware(['auth'])->group(function () {
+    // Tableau de bord
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::resource('ventes', VenteController::class)->only('create','store','index','show');
-    Route::post('/simple-exel/expot', [ExportationEcontroller::class,'exportation'] )->name('export');
-    Route::get('clients', [ClientController::class, 'index'])->name('clients.index');
-    Route::post('clients', [ClientController::class, 'store'])->name('clients.store');
-    Route::get('clients', [ClientController::class, 'create'])->name('clients.create');
+    // Clients (hors suppression)
     Route::resource('clients', ClientController::class)->except('destroy');
+
+    // Produits (uniquement index)
     Route::get('produits', [ProduitController::class, 'index'])->name('produits.index');
+
+    // Mouvements de stock (uniquement index)
     Route::get('mouvementStocks', [MouvementStockController::class, 'index'])->name('mouvementStocks.index');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Exportation Excel
+    Route::post('/simple-exel/expot', [ExportationEcontroller::class, 'exportation'])->name('export');
+
+    // Ventes (affichage + création)
+    Route::get('/ventes', [VenteController::class, 'index'])->name('ventes.index');
+    Route::get('/ventes/create', [VenteController::class, 'create'])->name('ventes.create')->middleware('verifier.heure.vente');
+    Route::post('/ventes', [VenteController::class, 'store'])->name('ventes.store')->middleware('verifier.heure.vente');
+    Route::get('/ventes/{vente}', [VenteController::class, 'show'])->name('ventes.show');
 });
 
-Route::middleware(['web', 'verified', 'auth','is.admin'])->group(function () {
-    Route::get('/ventes/{vente}',[VenteController::class,'edit'])->name('ventes.edit');
-    Route::put('/ventes',[VenteController::class,'update'])->name('ventes.update');
-    Route::delete('/ventes/{vente}',[VenteController::class,'destroy'])->name('ventes.destroy');
-    Route::POST('/ventes/{vente}/annuler', [VenteController::class, 'annulerVente'])->name('ventes.annuler');
+
+Route::resource('users', UserContoller::class);
+Route::resource('roles', RoleController::class);
+Route::resource('permissions', PermissionController::class);
+
+
+
+
+
+
+
+
+// Groupe pour les administrateurs vérifiés
+Route::middleware(['web', 'verified', 'auth', 'is.admin'])->group(function () {
+    // Gestion des ventes (édition, suppression, annulation)
+    Route::get('/ventes/{vente}/edit', [VenteController::class, 'edit'])->name('ventes.edit');
+    Route::put('/ventes', [VenteController::class, 'update'])->name('ventes.update');
+    Route::delete('/ventes/{vente}', [VenteController::class, 'destroy'])->name('ventes.destroy');
+    Route::post('/ventes/{vente}/annuler', [VenteController::class, 'annulerVente'])->name('ventes.annuler');
+
+    // Suppression des clients
     Route::delete('clients/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
-    route::resource('produits',ProduitController::class)->except('index');
-    Route::resource('roles',RoleController::class);
-    Route::resource('permissions',PermissionController::class);
-    Route::resource('users', UserContoller::class);
-    Route::resource('mouvementStocks', MouvementStockController::class)->except('index');
+
+    // Produits (sauf index)
+    Route::resource('produits', ProduitController::class)->except('index');
+
+    // Gestion des rôles, permissions, utilisateurs
+    // Route::resource('roles', RoleController::class);
+    // Route::resource('permissions', PermissionController::class);
+    // Route::resource('users', UserContoller::class);
+
+
+
+    // Mouvements de stock (hors index)
+    Route::resource('mouvementStocks', MouvementStockController::class)->only( 'create', 'store', 'update', 'destroy');
+    Route::get('/mouvementStocks/{mouvementStock}/edit', [MouvementStockController::class, 'edit'])->name('mouvementStocks.edit');
+
+    // Gestion des horaires
     Route::get('/horaires', [HoraireController::class, 'index'])->name('admin.horaires.index');
     Route::get('/horaires/edit', [HoraireController::class, 'edit'])->name('admin.horaires.edit');
     Route::post('/horaires', [HoraireController::class, 'update'])->name('admin.horaires.update');
 });
 
-
-
-
-
+// Auth routes (login, register, etc.)
 require __DIR__.'/auth.php';
-
-?>

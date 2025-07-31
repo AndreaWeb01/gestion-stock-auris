@@ -19,10 +19,10 @@ class Client extends Model
     {
         parent::boot();
 
-        static::created(function ($client) {
-            $client->code_client = 'CLI-' . str_pad($client->id, 6, '0', STR_PAD_LEFT);
-            $client->save();
-        });
+        // static::created(function ($client) {
+        //     $client->code_client = 'CLI-' . str_pad($client->id, 6, '0', STR_PAD_LEFT);
+        //     $client->save();
+        // });
     }
     // 🔁 Un client peut avoir plusieurs ventes
     public function ventes()

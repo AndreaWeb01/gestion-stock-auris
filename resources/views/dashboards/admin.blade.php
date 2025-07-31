@@ -1,259 +1,260 @@
 @extends('layouts.base')
+@section('title', 'Dashboard Administrateur')
 @section('content')
 
-<div class="px-3">
 
-                <!-- Start Content-->
-                <div class="container-fluid">
+                <div class="row mt-3">
+                    <div class="col-lg-6">
+                        <h4 class="page-title mb-0">Dashboard Administrateur</h4>
+                    </div>
 
-                    <!-- start page title -->
-                    <div class="py-3 py-lg-4">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h4 class="page-title mb-0">Dashboard Administrateur</h4>
+                </div>
+
+
+            <div class="row mt-3">
+                <div class="col-lg-6 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h5 class="text-uppercase font-size-12 text-muted mb-3">Chiffre d'Affaires</h5>
+                                    <span class="h3 mb-0">{{ (number_format($chiffreAffaires, 0, ',', ' ')) }} Fr</span>
+                                </div>
+
+                            </div> <!-- end row -->
+
+                            <div id="sparkline1" class="mt-3"></div>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+
+                <div class="col-lg-6 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="text-uppercase font-size-12 text-muted mb-3">CA du mois en cours</h6>
+                                    <span class="h3 mb-0">{{ number_format($chiffreAffaireMoisEnCours, 0, ',', ' ') }}
+                                    </span>
+                                </div>
+                            </div> <!-- end row -->
+
+                            <div id="sparkline2" class="mt-3"></div>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+
+                <div class="col-lg-6 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="text-uppercase font-size-12 text-muted mb-3">chiffre d'affaires journalier
+                                    </h6>
+                                    <span class="h3 mb-0">{{ (number_format($ca_journalier, 0, ',', ' ')) }} Fr</span>
+                                </div>
+                                <div class="col-auto">
+                                    <span class="badge badge-soft-success">+3.5%</span>
+                                </div>
+                            </div> <!-- end row -->
+
+                            <div id="sparkline3" class="mt-3"></div>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+
+                <div class="col-lg-6 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="text-uppercase font-size-12 text-muted mb-3">TOTAL VENTES REALISEES</h6>
+                                    <span class="h3 mb-0">{{ number_format($nombreVentes, 0, ',', ' ') }}</span>
+                                </div>
+                            </div> <!-- end row -->
+
+                            <div id="sparkline4" class="mt-3"></div>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+            </div>
+            <!-- end row-->
+
+                <div class="row mt-3">
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Chiffre d'affaires par produit (par mois)</h4>
                             </div>
-                            <div class="col-lg-6">
-                               <div class="d-none d-lg-block">
-                                <ol class="breadcrumb m-0 float-end">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Drezoc</a></li>
-                                    <li class="breadcrumb-item active">Dashboard</li>
-                                </ol>
-                               </div>
+                            <div class="card-body">
+                                <div id="chart" style="height: 300px;"></div><!-- end col-->
                             </div>
                         </div>
                     </div>
-                    <!-- end page title -->
-
-                    <div class="row">
-                        <div class="col-lg-6 col-xl-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h6 class="text-uppercase font-size-12 text-muted mb-3">Cost per Unit</h6>
-                                            <span class="h3 mb-0"> $85.50 </span>
-                                        </div>
-                                        <div class="col-auto">
-                                            <span class="badge badge-soft-success">+7.5%</span>
-                                        </div>
-                                    </div> <!-- end row -->
-
-                                    <div id="sparkline1" class="mt-3"></div>
-                                </div> <!-- end card-body-->
-                            </div> <!-- end card-->
-                        </div> <!-- end col-->
-
-                        <div class="col-lg-6 col-xl-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h6 class="text-uppercase font-size-12 text-muted mb-3">Market Revenue</h6>
-                                            <span class="h3 mb-0"> $12,548.25 </span>
-                                        </div>
-                                        <div class="col-auto">
-                                            <span class="badge badge-soft-danger">-24.5%</span>
-                                        </div>
-                                    </div> <!-- end row -->
-
-                                    <div id="sparkline2" class="mt-3"></div>
-                                </div> <!-- end card-body-->
-                            </div> <!-- end card-->
-                        </div> <!-- end col-->
-
-                        <div class="col-lg-6 col-xl-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h6 class="text-uppercase font-size-12 text-muted mb-3">Expenses</h6>
-                                            <span class="h3 mb-0"> $8,451.28 </span>
-                                        </div>
-                                        <div class="col-auto">
-                                            <span class="badge badge-soft-success">+3.5%</span>
-                                        </div>
-                                    </div> <!-- end row -->
-
-                                    <div id="sparkline3" class="mt-3"></div>
-                                </div> <!-- end card-body-->
-                            </div> <!-- end card-->
-                        </div> <!-- end col-->
-
-                        <div class="col-lg-6 col-xl-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h6 class="text-uppercase font-size-12 text-muted mb-3">Daily Visits</h6>
-                                            <span class="h3 mb-0"> 1,12,584 </span>
-                                        </div>
-                                        <div class="col-auto">
-                                            <span class="badge badge-soft-success">+53.5%</span>
-                                        </div>
-                                    </div> <!-- end row -->
-
-                                    <div id="sparkline4" class="mt-3"></div>
-                                </div> <!-- end card-body-->
-                            </div> <!-- end card-->
-                        </div> <!-- end col-->
-                    </div>
-                    <!-- end row-->
-
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">All Time Best Products</h4>
-                                    <p class="card-subtitle">From date of 1st Jan 2019 to continue</p>
-                                </div>
-
-                                <div class="card-body">
-                                    <div id="morris-donut-example" class="morris-chart"></div>
-                                </div> <!-- end card-body-->
-                            </div> <!-- end card-->
-                        </div> <!-- end col-->
-
-                        <div class="col-xl-8 col-lg-7">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Sales Analytics</h4>
-                                    <p class="card-subtitle">From date of 1st Jan 2019 to continue</p>
-                                </div>
-                                <div class="card-body">
-                                    <div id="morris-bar-example" class="morris-chart"></div>
-                                </div>
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Chiffre d'affaires par mois</h4>
                             </div>
-                        </div> <!-- end col-->
+                            <div class="card-body">
+                                <canvas id="barChart"></canvas>
+                            </div>
+                        </div>
                     </div>
-                    <!-- end row-->
+                </div> <!-- end row-->
 
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Recent Customers</h4>
-                                    <p class="card-subtitle">Transaction period from 21 July to 25 Aug</p>
-                                </div>
-                                <div class="card-ody">
-                                    <div class="table-responsive">
-                                        <table class="table table-centered table-striped table-nowrap mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Customer</th>
-                                                    <th>Phone</th>
-                                                    <th>Email</th>
-                                                    <th>Location</th>
-                                                    <th>Create Date</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                <div class="row mt-3">
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Derniers clients ayant acheté</h4>
+                            </div>
+                            <div class="card-ody">
+                                <div class="table-responsive">
+                                    <table class="table table-centered table-striped table-nowrap mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Téléphone</th>
+                                                <th>Adresse</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($derniersClients as $derniersClient)
                                                 <tr>
                                                     <td class="table-user">
-                                                        <img src="assets/images/users/avatar-4.jpg" alt="table-user"
-                                                            class="me-2 avatar-sm rounded-circle">
-                                                        <a href="javascript:void(0);"
-                                                            class="text-body font-weight-semibold">Paul J. Friend</a>
+                                                        {{ $derniersClient->client->nom }}
+
                                                     </td>
                                                     <td>
-                                                        937-330-1634
+                                                        {{ $derniersClient->client->telephone }}
                                                     </td>
                                                     <td>
-                                                        pauljfrnd@jourrapide.com
+                                                        {{ $derniersClient->client->adresse }}
                                                     </td>
-                                                    <td>
-                                                        New York
-                                                    </td>
-                                                    <td>
-                                                        07/07/2024
-                                                    </td>
+
                                                 </tr>
+                                            @endforeach
 
 
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div> <!-- end card-body-->
-                            </div> <!-- end card-->
-                        </div> <!-- end col -->
-
-                        <div class="col-xl-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Account Transactions</h4>
-                                    <p class="card-subtitle">Transaction period from 21 July to 25 Aug</p>
+                                        </tbody>
+                                    </table>
                                 </div>
 
-                                <div class="card-bod">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover table-centered table-nowrap mb-0">
-                                            <thead>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col -->
+
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">les 5 dernieres ventes</h4>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-centered table-nowrap mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Code de Recu</th>
+                                                <th>Date de vente </th>
+                                                <th>Remise</th>
+                                                <th>Montant Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($derniersVentes as $vente)
                                                 <tr>
-                                                    <th>Card Number</th>
-                                                    <th>Amount</th>
-                                                    <th>Card Type</th>
-                                                    <th>User Name</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <h5 class="font-size-15 mb-1 font-weight-normal">4257 **** ****
-                                                            7852</h5>
-                                                        <span class="text-muted font-size-12">11 April 2019</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-size-15 mb-1 font-weight-normal">$79.49</h5>
-                                                        <span class="text-muted font-size-12">Amount</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-size-17 mb-1 font-weight-normal"><i
-                                                                class="fab fa-cc-visa"></i></h5>
-                                                        <span class="text-muted font-size-12">Card</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-size-15 mb-1 font-weight-normal">Helen Warren
-                                                        </h5>
-                                                        <span class="text-muted font-size-12">Pay</span>
-                                                    </td>
-                                                </tr>
+                                                    <td>{{ $vente->code_recu }}</td>
+                                                    <td>{{ $vente->created_at }}</td>
+                                                    <td>{{ $vente->remise}}</td>
+                                                    <td>{{ $vente->montant_total }}</td>
+                                            @endforeach
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
+                                </div>
 
-
-                                                <tr>
-                                                    <td>
-                                                        <h5 class="font-size-15 mb-1 font-weight-normal">4257 **** ****
-                                                            7852</h5>
-                                                        <span class="text-muted font-size-12">12 Nov 2024</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-size-15 mb-1 font-weight-normal">$8964.04</h5>
-                                                        <span class="text-muted font-size-12">Amount</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-size-17 mb-1 font-weight-normal"><i
-                                                                class="fab fa-cc-visa"></i></h5>
-                                                        <span class="text-muted font-size-12">Card</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-size-15 mb-1 font-weight-normal">Caitlyn Gibney
-                                                        </h5>
-                                                        <span class="text-muted font-size-12">Pay</span>
-                                                    </td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div> <!-- end card-body-->
-                            </div> <!-- end card-->
-                        </div> <!-- end col -->
+                            </div>
+                        </div>
                     </div>
-                    <!-- end row-->
 
-                </div> <!-- container -->
 
-            </div> <!-- content -->
-    @endsection
+
+@endsection
+@section('scripts')
+    <!-- Morris.js et dépendances -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+    <script>
+        const chartData = @json($chartData);
+
+        const moisLabels = Object.keys(chartData);
+        const produits = [...new Set(Object.values(chartData).flatMap(item => Object.keys(item)))];
+
+        const morrisData = moisLabels.map(mois => {
+            const row = { y: mois };
+            produits.forEach(produit => {
+                row[produit] = chartData[mois][produit] ?? 0;
+            });
+            return row;
+        });
+
+        new Morris.Bar({
+            element: 'chart',
+            data: morrisData,
+            xkey: 'y',
+            ykeys: produits,
+            labels: produits,
+            hideHover: 'auto',
+            resize: true,
+            barColors: ['#0b62a4', '#7a92a3', '#4da74d', '#afd8f8'],
+            ymin: 0, // Définir l'origine de l'axe Y à 0 (modifiable)
+            ymax: 'auto' // Vous pouvez remplacer 'auto' par une valeur numérique pour fixer l'échelle max
+        });
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('barChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: @json($labels),
+            datasets: [{
+                label: 'Chiffre d’affaires par mois',
+                data: @json($data),
+                borderColor: 'turquoise',
+                backgroundColor: 'rgba(64, 224, 208, 0.2)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            if (value >= 1000000) {
+                                return (value / 1000000).toFixed(1) + ' M CFA';
+                            } else if (value >= 1000) {
+                                return (value / 1000).toFixed(0) + ' k CFA';
+                            }
+                            return value + ' CFA';
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
+
+@endsection

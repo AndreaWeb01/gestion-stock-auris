@@ -1,13 +1,14 @@
 @extends('layouts.base')
+@section('title', 'Créer une vente')
 
 @section('content')
 
 <div class="row mt-5">
     <div class="col-12">
         <div class="card shadow-sm border-0">
-            <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+            <div class="card-header card-heade d-flex justify-content-between align-items-center">
                 <h3 class="text-white m-0"><i class="fas fa-list me-2"></i> Liste des ventes</h3>
-                <a href="{{ route('ventes.create') }}" class="btn btn-light text-info fw-bold shadow-sm">
+                <a href="{{ route('ventes.create') }}" class="btn btn-header fw-bold shadow-sm">
                     <i class="fas fa-plus me-1"></i> Nouvelle vente
                 </a>
             </div>
@@ -57,12 +58,12 @@
                     <td><input type="number" name="produits[0][prix]" class="form-control prix" readonly></td>
                     <td><input type="number" name="produits[0][quantite]" class="form-control quantite" min="1" value="1" required></td>
                     <td><input type="number" class="form-control total" readonly></td>
-                    <td><button type="button" class="btn btn-danger btn-sm supprimer-ligne">🗑</button></td>
+                    <td><button type="button" class="btn btn-delete btn-sm supprimer-ligne"><i class="fas fa-trash"></i></button></td>
                 </tr>
             </tbody>
         </table>
 
-        <button type="button" class="btn btn-secondary" id="ajouter-ligne">➕ Ajouter un produit</button>
+        <button type="button" class="btn btn-header1" id="ajouter-ligne">➕ Ajouter un produit</button>
 
         {{-- Remise et total --}}
         <div class="row mt-4">
@@ -92,7 +93,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-4">💾 Enregistrer la vente</button>
+        <button type="submit" class="btn btn-header1 mt-4">💾 Enregistrer la vente</button>
     </form>
     </div>
     </div>

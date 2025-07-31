@@ -62,6 +62,8 @@
                 {{ $produits->appends(request()->query())->links() }}
             </div> <!-- end card-body -->
         </div> <!-- end card -->
+  </div>
+    </div>
 
 </div> <!-- end col -->
 </div> <!-- end row -->

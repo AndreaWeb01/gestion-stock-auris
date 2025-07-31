@@ -16,15 +16,15 @@ class MouvementStockController extends Controller
     public function index()
     {
 
-        $produits = Produit::all();
+        $produits = Produit::all(); // Récupère tous les produits pour le champ
         $users = User::all(); // Récupère tous les utilisateurs pour le champ
 
-        $mouvements = MouvementStock::paginate(10);
-        return view('admin.stocks.index', compact('mouvements'));
+        $mouvements = MouvementStock::paginate(15);
+        return view('admin.stocks.index', compact('mouvements', 'produits', 'users'));
 
     }
 
-    // Formulaire de création
+
     public function create()
     {
         $produits = Produit::all();
@@ -54,7 +54,7 @@ class MouvementStockController extends Controller
         $mouvement->quantite = $request->quantite;
         $mouvement->motif = $request->motif;
         $mouvement->date_mouvement = $request->date_mouvement;
-        $mouvement->user_id = $users->id; // utilisateur connecté
+        $mouvement->user_id = Auth::id(); // utilisateur connecté
         $mouvement->vente_id = null; // sera rempli uniquement pour les ventes
         $mouvement->save();
 
@@ -71,13 +71,13 @@ class MouvementStockController extends Controller
         return view('admin.stocks.show', compact('mouvementStock'));
     }
 
-   public function edit(MouvementStock $mouvementStock)
-        {
-            $produits = Produit::all();
-            $users = User::all();
+public function edit(MouvementStock $mouvementStock)
+{
+    $produits = Produit::all();
+    $users = User::all();
 
-            return view('admin.stocks.edit', compact('mouvementStock', 'produits', 'users'));
-        }
+    return view('admin.stocks.edit', compact('mouvementStock', 'produits', 'users'));
+}
 
 
     /**
@@ -97,7 +97,7 @@ class MouvementStockController extends Controller
 
         $mouvementStock->update($request->all());
 
-        return redirect()->route('admin.mouvements.index')->with('success', 'Mouvement de stock mis à jour avec succès.');
+        return redirect()->route('mouvementStocks.index')->with('success', 'Mouvement de stock mis à jour avec succès.');
     }
 
     /**
