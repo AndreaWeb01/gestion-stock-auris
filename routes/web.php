@@ -45,6 +45,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/ventes/{vente}', [VenteController::class, 'show'])->name('ventes.show');
 });
 
+
+Route::resource('users', UserContoller::class);
+Route::resource('roles', RoleController::class);
+Route::resource('permissions', PermissionController::class);
+
+
+
+
+
+
+
+
 // Groupe pour les administrateurs vérifiés
 Route::middleware(['web', 'verified', 'auth', 'is.admin'])->group(function () {
     // Gestion des ventes (édition, suppression, annulation)
@@ -60,9 +72,9 @@ Route::middleware(['web', 'verified', 'auth', 'is.admin'])->group(function () {
     Route::resource('produits', ProduitController::class)->except('index');
 
     // Gestion des rôles, permissions, utilisateurs
-    Route::resource('roles', RoleController::class);
-    Route::resource('permissions', PermissionController::class);
-    Route::resource('users', UserContoller::class);
+    // Route::resource('roles', RoleController::class);
+    // Route::resource('permissions', PermissionController::class);
+    // Route::resource('users', UserContoller::class);
 
 
 
