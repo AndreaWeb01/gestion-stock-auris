@@ -41,7 +41,7 @@ html[data-bs-theme=dark] {
 }
 
 [data-menu-color=dark] {
-  --bs-menu-bg: #17263a;
+  --bs-menu-bg:#02226b !important;
   --bs-menu-item-color: #9097a7;
   --bs-menu-item-hover-color: #c8cddc;
   --bs-menu-item-active-color: #ffffff;
@@ -19000,10 +19000,10 @@ span.flatpickr-weekday,
 
 /*!
  * Waves v0.7.6
- * http://fian.my.id/Waves 
- * 
- * Copyright 2014-2018 Alfiana E. Sibuea and other contributors 
- * Released under the MIT license 
+ * http://fian.my.id/Waves
+ *
+ * Copyright 2014-2018 Alfiana E. Sibuea and other contributors
+ * Released under the MIT license
  * https://github.com/fians/Waves/blob/master/LICENSE */
 .waves-effect {
   position: relative;

@@ -4,16 +4,13 @@
 <div class="row mt-5">
     <div class="col-12">
         <div class="card shadow-sm border-0">
-            <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+            <div class="card-header card-heade d-flex justify-content-between align-items-center">
                 <h3 class="text-white m-0"><i class="fas fa-list me-2"></i>  Liste des mouvements de stock</h3>
-                <a href="{{ route('mouvementStocks.create') }}" class="btn btn-light text-info fw-bold shadow-sm">
-                    <i class="fas fa-plus me-1"></i> Nouveau mouvement de stock
+                <a href="{{ route('mouvementStocks.create') }}" class="btn btn-header fw-bold shadow-sm">
+                    <i class="fas fa-arrow-left me-1"></i> Retour
                 </a>
             </div>
              <div class="card-body">
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
     @if($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -61,10 +58,15 @@
         </div>
 
         <div class="text-end">
-            <button type="submit" class="btn btn-info btn-lg px-5">
+            <button type="submit" class="btn btn-header1 btn-lg p-2">
                 <i class="fas fa-save me-2"></i>Enregistrer le mouvement
             </button>
         </div>
     </form>
 </div>
+ </div>
+    </div>
+
+
+
 @endsection
