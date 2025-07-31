@@ -61,6 +61,7 @@ class DetailVenteController extends Controller
      */
     public function destroy(Detail_Vente $detailVente)
     {
-        //
+        
+
     }
 }

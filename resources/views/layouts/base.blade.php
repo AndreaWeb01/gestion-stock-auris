@@ -35,6 +35,45 @@
     <link href="{{url('assets/css/style.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
     <script src="{{url('assets/js/config.js')}}"></script>
+    <style>
+        .card-heade {
+            background-color: #02228b;
+            color: #ffffff !important;
+        }
+        .btn-header {
+            background-color: #ffffff;
+            color: #02228b;
+            border: #02228b 1px solid;
+        }
+        .btn-header:hover {
+            background-color: #e0e0e0;
+            color: #02228b;
+            border: 1px solid #02228b;
+            font-weight: bold;
+        }
+        .btn-header1 {
+            background-color: #02228b;
+            color: #ffffff;
+            border: #02228b 1px solid;
+        }
+        .btn-header1:hover {
+            background-color: #e0e0e0;
+            color: #02228b;
+            border: 1px solid #02228b;
+            font-weight: bold;
+        }
+        .btn-delete {
+            background-color: #dd1313;
+            color: #ffffff;
+            border: none;
+        }
+        .btn-delete:hover {
+            background-color: #e60000;
+            color: #ffffff;
+            border: none;
+            font-weight: bold;
+        }
+    </style>
 
 
 

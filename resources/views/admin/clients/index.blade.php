@@ -7,9 +7,9 @@
     <div class="col-12">
         <div class="card shadow-sm border-0">
             <div class="card-header bg-gradient bg-info  d-flex justify-content-between align-items-center">
-                <h4 class=" text-white mb-0"> <i class="fas fa-list me-2"></i> Liste des clients</h4>
+                <h4 class=" text-white mb-0"> <i class="fas fa-list me-3"></i> Liste des clients</h4>
                 <a href="{{ route('clients.create') }}" class="btn btn-light text-info fw-bold shadow-sm">
-                    <i class="fas fa-arrow-left me-1"></i> Retour
+                    <i class="fas fa-plus me-1"></i> Nouveau client
                 </a>
             </div>
 
@@ -40,14 +40,20 @@
                     <td>{{ $client->telephone }}</td>
                     <td>{{ $client->adresse }}</td>
                     <td>
-                        <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-info"><i class="fas fa-edit btn-delete"></i> </a>
-                        <form id="delete-form-{{ $client->id }}" action="{{ route('clients.destroy', $client) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="button" class="btn btn-lg btn-danger btn-delete" data-form-id="delete-form-{{ $client->id }}">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
+                        <div class="btn-group gap-2">
+                                            <a href="{{ route('clients.edit', $client) }}" class="btn btn-lg btn-info rounded-3">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form id="delete-form-{{ $client->id }}" action="{{ route('clients.destroy', $client) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-lg btn-danger btn-delete rounded-3" data-form-id="delete-form-{{ $client->id }}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+
+                                            </form>
+
+                                        </div>
                     </td>
                 </tr>
             @endforeach
@@ -58,6 +64,8 @@
  </div> <!-- end card-body -->
         </div> <!-- end card -->
     </div> <!-- end col -->
+</div>
+</div>
 </div>
 
 

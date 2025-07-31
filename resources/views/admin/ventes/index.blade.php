@@ -4,9 +4,9 @@
 <div class="row mt-5">
     <div class="col-12">
         <div class="card shadow-sm border-0">
-            <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+            <div class="card-header  d-flex justify-content-between align-items-center card-heade">
                 <h3 class="text-white m-0"><i class="fas fa-list me-2"></i> Liste des ventes</h3>
-                <a href="{{ route('ventes.create') }}" class="btn btn-light text-info fw-bold shadow-sm">
+                <a href="{{ route('ventes.create') }}" class="btn btn-header  fw-bold shadow-sm">
                     <i class="fas fa-plus me-1"></i> Nouvelle vente
                 </a>
             </div>
@@ -55,16 +55,14 @@
     @endif
 
     <table class="table table-hover table-bordered dt-responsive nowrap w-100">
-        <thead class="table-dark">
+        <thead class="card-heade  table-dark">
             <tr>
                 <th>Code reçu</th>
                 <th>Client</th>
-                <th>Utilisateur</th>
-                <th>Statut</th>
                 <th>Date</th>
                 <th>Montant total</th>
                 <th>Remise</th>
-
+                <th>Recu de vente</th>
                <th>Actions</th>
 
 
@@ -79,8 +77,8 @@
             @endif>
                 <td>{{ $vente->code_recu }}</td>
                 <td>{{ $vente->client->nom ?? '' }}</td>
-                <td>{{ $vente->user->nom ?? '' }}</td>
-                <td>
+
+                {{-- <td>
                     @if ($vente->statut=='valide')
                         <span class="badge bg-success">Validée</span>
                     @elseif ($vente->statut=='annulee')
@@ -89,18 +87,25 @@
                         <span style="background-color:#214ea7 ;">{{ $vente->statut }}</span>
                     @endif
 
-                </td>
-                <td>{{ $vente->date_vente }}</td>
+                </td> --}}
+                <td>{{ $vente->created_at->format('d/m/Y H:i') }}</td>
                 <td>{{ number_format($vente->montant_total, 0, ',', ' ') }} FCFA</td>
                 <td>{{ number_format($vente->remise, 0, ',', ' ') }} FCFA</td>
-                <td style="display:flex;flex-direction:row;justify-content:center;">
-                    {{-- <a href="{{ route('ventes.show', $vente->id) }}" class="btn btn-info btn-sm">Détail</a> --}}
+                <td>
+                    @if($vente->code_recu)
+                        <a href="{{ asset('storage/recus/recu_vente_'.$vente->client->nom.'_'.$vente->code_recu.'.pdf') }}" class="btn btn-header1 btn-lg" target="_blank"><i class="fas fa-file-pdf"></i></a>
+                    @else
+                        <span class="text-muted">Pas de reçu</span>
+                    @endif
+                </td>
+                <td style="display:flex;flex-direction:row;justify-content:center; gap: 5px; ">
+                     <a href="{{ route('ventes.show', $vente->id) }}" class="btn btn-header1 text-white-bold btn-lg rounded-3"><i class="fas fa-eye"></i></a>
                     @can('Modifier / annuler vente')
-                    <form action="{{ route('ventes.annuler', $vente->id) }}" method="POST" onsubmit="return confirm('Confirmer l\'annulation de la vente ?')">
+                    <form id="form-annuler-{{ $vente->id }}" action="{{ route('ventes.annuler', $vente->id) }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-danger btn-sm">Annuler</button>
+                    <button type="button" class="btn btn-delete btn-lg" onclick="confirmerAnnulation({{ $vente->id }})"><i class="fas fa-cancel"></i></button>
                     </form>
-                    @endcan
+                 @endcan
                 </td>
             </tr>
             @endforeach
@@ -110,6 +115,24 @@
         </div>
     </div>
 </div>
+<script>
+function confirmerAnnulation(id) {
+    Swal.fire({
+        title: 'Êtes-vous sûr ?',
+        text: "Vous allez annuler cette vente !",
+        icon: 'danger',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Oui, annuler',
+        cancelButtonText: 'Non'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('form-annuler-' + id).submit();
+        }
+    });
+}
+</script>
 
 
 

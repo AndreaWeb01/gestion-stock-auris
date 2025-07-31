@@ -37,7 +37,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label>Utilisateur</label>
             <select name="user_id" class="form-control" required>
                 <option value="">-- Choisir un utilisateur --</option>
@@ -46,7 +46,7 @@
                 @endforeach
             </select>
 
-        </div>
+        </div> --}}
 
         <div class="mb-3">
             <label>Type de mouvement</label>

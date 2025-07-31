@@ -6,9 +6,9 @@
     <div class="col-12">
         <div class="card shadow-sm border-0">
             <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
-                <h3 class="text-white m-0"><i class="fas fa-list me-2"></i>  Liste des clients</h3>
-                <a href="{{ route('roles.create') }}" class="btn btn-light text-info fw-bold shadow-sm">
-                    <i class="fas fa-plus me-1"></i> Nouveau client
+                <h3 class="text-white m-0"><i class="fas fa-plus me-3"></i>  Créer un client</h3>
+                <a href="{{ route('clients.index') }}" class="btn btn-light text-info fw-bold shadow-sm">
+                    <i class="fas fa-plus me-1"></i> Retour à la liste
                 </a>
             </div>
         <div class="card-body">
@@ -58,6 +58,8 @@
 
         </div>
     </div>
+</div>
+
 
 
 @endsection

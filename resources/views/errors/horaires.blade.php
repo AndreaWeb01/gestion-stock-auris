@@ -18,6 +18,8 @@
         </a>
     </div>
 </div>
+</div>
+</div>
 @endsection
 
 @section('styles')
