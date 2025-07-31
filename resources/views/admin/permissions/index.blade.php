@@ -18,7 +18,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="datatable-buttons" class="table table-hover table-bordered dt-responsive nowrap w-100">
+                         <table class="table table-hover table-bordered dt-responsive nowrap w-100">
                             <thead class="table-dark">
                                 <tr>
                                     <th>ID</th>
@@ -32,7 +32,7 @@
                                     <td>{{ $permission->id }}</td>
                                     <td>{{ $permission->name }}</td>
                                     <td>
-                                        <div class="btn-group gap-2">
+                                        <div  style="display:flex;flex-direction:row;justify-content:center; gap: 5px; ">
                                             <a href="{{ route('permissions.edit', $permission) }}" class="btn btn-lg btn-header1 rounded-3">
                                                 <i class="fas fa-edit"></i>
                                             </a>
