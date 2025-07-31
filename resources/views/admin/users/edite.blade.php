@@ -4,10 +4,10 @@
 <div class="row mt-5">
     <div class="col-12">
         <div class="card shadow-sm border-0">
-            <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
-                <h3 class="text-white m-0"><i class="fas fa-list me-2"></i> Liste des utilisateurs</h3>
-                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-light text-info fw-bold shadow-sm">
-                    <i class="fas fa-edit me-1"></i> Modifier l'utilisateur
+            <div class="card-header card-heade d-flex justify-content-between align-items-center">
+                <h3 class="text-white m-0"><i class="fas fa-list me-2"></i>Modifier un utilisateur</h3>
+                <a href="{{ route('users.index') }}" class="btn btn-header fw-bold shadow-sm">
+                    <i class="fas fa-arrow-left me-1"></i>Retour à la liste
                 </a>
             </div>
             <div class="card-body">
@@ -69,9 +69,8 @@
                         @endforeach
                     </select>
                 </div>
+                <button type="submit" class="btn btn-header1"><i class="fas fa-save me-2"></i> Mettre à jour</button>
 
-                <button type="submit" class="btn btn-primary">Mettre à jour</button>
-                <a href="{{ route('users.index') }}" class="btn btn-secondary">Annuler</a>
             </form>
         </div>
     </div>

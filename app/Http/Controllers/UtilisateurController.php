@@ -62,6 +62,10 @@ class UtilisateurController extends Controller
 
         return redirect()->route('users.index')->with('success', 'Utilisateur modifié.');
     }
+    public function show(User $user)
+    {
+        return view('admin.users.show', compact('user'));
+    }
 
     public function destroy(User $user)
     {

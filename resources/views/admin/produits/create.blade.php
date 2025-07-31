@@ -6,7 +6,7 @@
     <div class="row mt-5">
         <div class="col-12">
             <div class="card shadow-sm border-0">
-                <div class="card-header bg-gradient bg-info d-flex justify-content-between align-items-center">
+                <div class="card-header card-heade d-flex justify-content-between align-items-center">
                     <h3 class="header-title text-white"><i class="fas fa-plus me-2"></i>Nouveau Produit</h3>
                      <a href="{{ route('produits.index') }}" class="btn btn-light text-info fw-bold shadow-sm">
                     <i class="fas fa-arrow-left me-1"></i> Retour

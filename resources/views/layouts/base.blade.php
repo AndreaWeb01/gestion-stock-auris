@@ -62,6 +62,11 @@
             border: 1px solid #02228b;
             font-weight: bold;
         }
+        .btn-header2 {
+            background-color: #E6BA23;
+            color: #ffffff;
+            border: #E6BA23 1px solid;
+        }
         .btn-delete {
             background-color: #dd1313;
             color: #ffffff;
@@ -73,6 +78,11 @@
             border: none;
             font-weight: bold;
         }
+        .border1{
+            border: 1px solid #02228b;
+        }
+
+
     </style>
 
 

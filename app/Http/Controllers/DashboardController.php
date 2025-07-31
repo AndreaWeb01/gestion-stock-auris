@@ -13,12 +13,7 @@ use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     public function index()
-    {
-
-
-
-        // Récupérer les données pour le graphique des ventes par mois
-
+    {  // Récupérer les données pour le graphique des ventes par mois
     $chartData1 = DB::table('ventes')->where('statut', 'valide')
         ->select(
             DB::raw("strftime('%m', date_vente) as mois"),
@@ -124,9 +119,5 @@ class DashboardController extends Controller
             return view('dashboards.vendeur', compact('ventes'));
         }
 
-
-
-        // Affichage par défaut si aucun rôle spécifique
-        return view('dashboards.vendeur', compact('ventes'));
     }
 }

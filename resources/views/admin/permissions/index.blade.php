@@ -21,7 +21,7 @@
                          <table class="table table-hover table-bordered dt-responsive nowrap w-100">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Numéro</th>
                                     <th>Nom</th>
                                     <th>Actions</th>
                                 </tr>
@@ -29,17 +29,17 @@
                             <tbody>
                                 @foreach($permissions as $permission)
                                 <tr>
-                                    <td>{{ $permission->id }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $permission->name }}</td>
                                     <td>
                                         <div  style="display:flex;flex-direction:row;justify-content:center; gap: 5px; ">
-                                            <a href="{{ route('permissions.edit', $permission) }}" class="btn btn-lg btn-header1 rounded-3">
+                                            <a href="{{ route('permissions.edit', $permission) }}" class="btn btn-sm btn-success rounded-3">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <form id="delete-form-{{ $permission->id }}" action="{{ route('permissions.destroy', $permission) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="btn btn-lg  btn-delete rounded-3" data-form-id="delete-form-{{ $permission->id }}">
+                                                <button type="button" class="btn btn-sm  btn-delete rounded-3" data-form-id="delete-form-{{ $permission->id }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
 

@@ -10,6 +10,7 @@
                     <i class="fas fa-plus me-1"></i> Nouvelle vente
                 </a>
             </div>
+
             <div class="card-body">
 
 
@@ -57,6 +58,7 @@
     <table class="table table-hover table-bordered dt-responsive nowrap w-100">
         <thead class="card-heade  table-dark">
             <tr>
+                <th>Numéro</th>
                 <th>Code reçu</th>
                 <th>Client</th>
                 <th>Date</th>
@@ -75,6 +77,7 @@
 
             @else style="background-color:#e2e3e5 ;"
             @endif>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $vente->code_recu }}</td>
                 <td>{{ $vente->client->nom ?? '' }}</td>
 
