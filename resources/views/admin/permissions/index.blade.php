@@ -9,11 +9,16 @@
                 <div class="card-header  card-heade d-flex justify-content-between align-items-center">
                     <h3 class="header-title text-white"><i class="fas fa-list me-2"></i>Liste des permissions </h3>
                     <div class="card-tools">
-                        @can('creer permission')
+                        {{-- @can('creer permission')
                         <a href="{{ route('permissions.create') }}" class="btn btn-header  fw-bold shadow-sm">
                             <i class="fas fa-plus me-1"></i> Nouvelle permission
                         </a>
-                        @endcan
+                        @endcan --}}
+                        
+                        <a href="{{ route('permissions.create') }}" class="btn btn-header  fw-bold shadow-sm">
+                            <i class="fas fa-plus me-1"></i> Nouvelle permission
+                        </a>
+                        
                     </div>
                 </div>
                 <div class="card-body">
