@@ -26,15 +26,15 @@
                          <table class="table table-hover table-bordered dt-responsive nowrap w-100">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>Numéro</th>
+                                    <th>N°</th>
                                     <th>Nom</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($permissions as $permission)
+                                @foreach($permissions as $key => $permission)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $key + 1 }}</td>
                                     <td>{{ $permission->name }}</td>
                                     <td>
                                         <div  style="display:flex;flex-direction:row;justify-content:center; gap: 5px; ">
@@ -72,6 +72,3 @@
     </div>
 
 @endsection
-
-
-
