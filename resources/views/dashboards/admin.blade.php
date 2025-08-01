@@ -81,7 +81,7 @@
             <!-- end row-->
 
                 <div class="row mt-3">
-                    <div class="col-xl-6">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Chiffre d'affaires par produit (par mois)</h4>
@@ -91,16 +91,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Chiffre d'affaires par mois</h4>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="barChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
+
                 </div> <!-- end row-->
 
                 <div class="row mt-3">
